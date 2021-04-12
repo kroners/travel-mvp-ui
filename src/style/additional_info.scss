@@ -7,7 +7,7 @@
     text-align: left;
     margin: 0 auto;
     padding: 10px;
-    color: $title-option;
+    color: $text-1;
 
     &__actividades_header,
     &__perfil_viaje_header,
@@ -16,6 +16,14 @@
         display: flex;
         align-content: center;
         vertical-align: middle;
+    }
+
+    &__actividades_wrapper {
+        overflow: auto;
+        height: 140px;
+        align-content: flex-start;
+        -webkit-flex-flow: row wrap;
+        flex-flow: row wrap;
     }
 
     &__actividad,
@@ -28,6 +36,12 @@
         &:not(:last-child) {
             margin-right: 10px;
         }
+    }
+
+
+    &__actividad {
+        min-width: 160px;
+        margin-bottom: 10px;
     }
 
     &__side_text {

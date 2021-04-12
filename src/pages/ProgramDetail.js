@@ -1,9 +1,10 @@
 import { AppBar, Box, Button, Tab, Tabs, Typography } from '@material-ui/core';
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { useFilters, useProjects } from '../hooks';
+import { useFilters } from '../hooks';
 import Sidebar from '../sections/Sidebar';
 
+require("../style/program_detail.scss"); 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
   
@@ -39,7 +40,7 @@ function TabPanel(props) {
 
 const ProgramDetail = () => {
     const { filters } = useFilters();
-    const { projects: { program } } = useProjects();
+    // const { projects: { program } } = useProjects();
     const [tabValue, setTabValue] = useState(0);
 
     const handleChange = (event, newValue) => {
@@ -53,23 +54,21 @@ const ProgramDetail = () => {
             </div>
             <div className="program_detail__wrapper">
                 <div className="program_detail__header">
-                    {program.title}
+                    <div className="program_detail__header_title">5 dias y 4 noches en Egipto</div>
                     <div className="program_detail__service">
-                        <p>{program.serviceType}</p>
-                        <p>Tour en {program.language}</p>
+                        <p>Servicio Privado con Guia</p>
+                        <p>Tour en Ingles</p>
                     </div>
                 </div>
                 <div className="program_detail__extras">
                     <div className="extras_left">
-                        <p className="extras__rating">{program.rating.value} {program.rating.detail}</p>
-                        {program.comentarios && 
-                            <p className="extras__comentarios">{program.comentarios} comentario(s)</p>
-                        }
+                        <p className="extras__rating">8.4 muy bueno</p>
+                        <p className="extras__comentarios">555 comentario(s)</p>
                     </div>
                     <div className="extras_right">
                         <div className="extras_pago">
                             <span>Forma de pago</span>
-                            <span>{program.price}</span>
+                            <span>USD 7,500</span>
                         </div>
                         <div className="extras_action">
                             <span className="extras_responsable">Responsable / Ag viaje</span>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import TextField from '@material-ui/core/TextField';
 import Slider from '@material-ui/core/Slider';
 import DateFnsUtils from '@date-io/date-fns';
@@ -9,23 +10,38 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import main_info_image from '../assets/aviones.jpg'
-import { AppBar, Box, makeStyles, Tab, Tabs, Typography } from '@material-ui/core';
 import CustomInput from '../components/CustomInput';
 
 require("../style/main_info.scss")
 
-function MainInfo() {
+function MainInfo({values}) {
 
+    const [destinationList, setDestinationList] = useState([{destination: ''}]);
     const [budgetValue, setBudgetValue] = useState([150, 2000]);
     const [selectedDate, setSelectedDate] = useState(new Date());
 
+    // handle click to add destination
     const handleAddDestination = () => {
-        console.log("lala")
+        setDestinationList([...destinationList, { destination: '' }]);
+    }
+
+    // handle click to remove destination
+    const handleRemoveClick = index => {
+        console.log("handleRemoveClick")
+        const list = [...destinationList];
+        list.splice(index, 1);
+        setDestinationList(list);
+    };
+
+    const handleDestinationChange = (e, index) => {
+        const { value } = e.target;
+        const list = [...destinationList];
+        list[index]['destination'] = value;
+        setDestinationList(list);
     }
     
-    const handleBudgetChange = () => {
-        console.log("lala")
+    const handleBudgetChange = (event, newValue) => {
+        setBudgetValue(newValue);
     }
     
     const handleDateChange = (date) => {
@@ -40,12 +56,35 @@ function MainInfo() {
                         <div className="main_info__destino">
                             <div className="main_info__destino_header">
                                 <h3>Destino</h3>
-                                <AddCircleIcon className="fill_circle_primary" onClick={handleAddDestination()} />
                             </div>
                             <div className="main_info__destino_body">
-                                <TextField id="pais-input" label="Pais" variant="outlined" className="general__input_field" />
-                                <TextField id="region-input" label="Región" variant="outlined" className="general__input_field" />
-                                <TextField id="ciudad-input" label="Ciudad" variant="outlined" className="general__input_field" />
+                                {destinationList.length > 0 && 
+                                    destinationList.map((el, i) => {
+                                        return (
+                                            <div className="main_info__destino_body_element">
+                                                <TextField 
+                                                    id={`destino-input-${i}`}
+                                                    label={destinationList.length === 1 ? "Destino" : `Destino #${i+1}`}
+                                                    variant="outlined"
+                                                    className="general__input_field"
+                                                    onChange={e => handleDestinationChange(e, i)}
+                                                />
+                                                {el && el.destination && 
+                                                    <RemoveCircleIcon 
+                                                        className="fill_circle_primary" 
+                                                        onClick={() => handleRemoveClick(i)}
+                                                    />
+                                                }
+                                                {destinationList.length === i + 1 && 
+                                                    <AddCircleIcon 
+                                                        className="fill_circle_primary" 
+                                                        onClick={() => handleAddDestination()}
+                                                    />
+                                                }
+                                            </div>
+                                        )
+                                    })
+                                }
                             </div>
                         </div>
                         <div className="main_info__fecha">
@@ -94,6 +133,10 @@ function MainInfo() {
             </Grid>
         </div>
     )
+}
+
+MainInfo.propTypes = {
+    values: PropTypes.array.isRequired,
 }
 
 export default MainInfo

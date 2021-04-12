@@ -4,42 +4,69 @@ import { Services } from '../sections/Services'
 import Accommodation from '../sections/Accommodation'
 import AdditionalInfo from '../sections/AdditionalInfo'
 import { Button, Step, StepLabel, Stepper } from '@material-ui/core'
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 import { useProjectsValue } from '../context'
+import { useHistory } from 'react-router-dom'
 
 require("../style/home.scss"); 
 
 const Home = () => {
 
   let innerSectionForm
-  const { filtersValues: { filters, setFilters } } = useProjectsValue()
-  console.log({ filters, setFilters })
+  let history = useHistory();
+  const { filtersValues: { filters } } = useProjectsValue()
   const [ step, setStep ] = useState(0)
   const stepsInfo = ["Informacion principal", "Servicios", "Hospedaje", "Datos adicionales"]
 
   // Proceed to next step
-  function handleNextSelect () {
-    console.log({ currentStep: step , nextStep: step + 1})
+  const handleNextSelect = () => {
     let nextStep = step + 1;
     setStep(nextStep)
   }
 
   // Go back to prev step
   function handlePrevSelect () {
-    console.log({ currentStep: step , prevStep: step - 1})
     let prevStep = step - 1;
     setStep(prevStep)
   }
 
   // Handle fields change
-  const handleSubmit = (input) => (e) => {
-    // this.setState({ [input]: e.target.value })
+  const handleSubmit = (input) => {
+    history.push('/programs')
   }
 
-  const handleChange = () => {
-    console.log("handleChange")
+  // const handleChange = () => {
+  //   console.log("handleChange")
+  // }
+
+  const CircularProgressWithLabel = (props) => {
+    return (
+      <Box position="relative" display="inline-flex">
+        <CircularProgress variant="determinate" 
+        size={40}
+        thickness={4} {...props} />
+        <Box
+          top={0}
+          left={0}
+          bottom={0}
+          right={0}
+          position="absolute"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Typography variant="caption" component="div" color="textSecondary">
+            {`${Math.round(
+              props.value,
+            )}`}
+          </Typography>
+        </Box>
+      </Box>
+    );
   }
 
-  console.log({ step })
   switch (step) {
     case 0:
       innerSectionForm = (
@@ -79,21 +106,24 @@ const Home = () => {
           </div>
         </div>
         <div className="home__stepper">
-        <Stepper activeStep={step} >
-          {stepsInfo.map((label) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
+          <Stepper activeStep={step} >
+            {stepsInfo.map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+        </div>
+        <div className="home__stepper--mobile">
+          <CircularProgressWithLabel value={25} />;
         </div>
         <div className="home__body">
           {innerSectionForm}
         </div>
         <div className="home__move_buttons">
           <Button variant="outlined" onClick={() => handlePrevSelect()}>Atras</Button>
-          {step !== 4 && <Button variant="outlined" onClick={() => handleNextSelect()}>Siguiente</Button>}
-          {step === 4 && <Button variant="outlined" onClick={() => handleSubmit()}>Consultar</Button>}
+          {step !== 3 && <Button variant="outlined" onClick={() => handleNextSelect()}>Siguiente</Button>}
+          {step === 3 && <Button variant="outlined" onClick={() => handleSubmit()}>Consultar</Button>}
         </div>
       </div>
   )

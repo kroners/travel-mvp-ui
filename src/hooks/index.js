@@ -42,4 +42,13 @@ export const useFilters = () => {
     }, [filters]);
 
   return { filters, setFilters }
-}
+};
+
+export const useConfig = () => {
+  const initialConfig = {
+    selectedPage: 'packages',
+  }
+  const [config, setConfig] = useState(initialConfig);
+
+  return { config, setConfig }
+};

@@ -1,5 +1,22 @@
 export const filterOptions = {
-    destinos: [],
+    destinos: [
+        {
+            id: 1,
+            pais: 'Peru',
+            ciudad: 'Lima',
+            region: 'Lima',
+            destino: 'Miraflores',
+            nombreDestino: 'Miraflores, Lima - Peru'
+        },
+        {
+            id: 1,
+            pais: 'Peru',
+            ciudad: 'Lima',
+            region: 'Lima',
+            destino: 'Barranco',
+            nombreDestino: 'Barranco, Lima - Peru'
+        },
+    ],
     fechas: {
         fechaInicio: '',
         fechaFin: '',

@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useHistory } from 'react-router-dom'
 
 import dummyLogo from "../assets/logo_blanco.png";
 require("../style/header.scss");
@@ -7,6 +8,11 @@ require("../style/header.scss");
 const Header = ({ logo, isLoggedIn, onLoginButtonClick }) => {
 
     logo = dummyLogo; 
+    let history = useHistory();
+
+    const goToProgramSearch= () => {
+        history.push('/');
+    }
 
     return (
         <header>
@@ -18,10 +24,17 @@ const Header = ({ logo, isLoggedIn, onLoginButtonClick }) => {
                 </div>
                 <div className="navbar__options">
                     <div className="navbar__paquetes">
+                        <button
+                            onClick={() => goToProgramSearch()}
+                        >
                         Paquetes
+                        </button>
                     </div>
                     <div className="navbar__contacta-asesor">
-                        Contacta un asesor
+                    <button
+                            onClick={() => goToProgramSearch()}
+                        >Contacta un asesor
+                        </button>
                     </div>
                 </div>
                 <div className="navbar__user-options">
@@ -31,6 +44,14 @@ const Header = ({ logo, isLoggedIn, onLoginButtonClick }) => {
             </div>
         </header>
     );
+}
+
+Header.defaultProps = {
+    isLoggedIn: false,
+}
+
+Header.propTypes = {
+    isLoggedIn: PropTypes.bool,
 }
 
 export default Header;

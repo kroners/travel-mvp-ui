@@ -20,6 +20,10 @@
         align-items: center;
         text-align: center;
         margin: 0 auto;
+
+        &--mobile {
+            display: none;
+        }
     }
 
     &__move_buttons {

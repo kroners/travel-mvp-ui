@@ -7,9 +7,14 @@
     text-align: center;
     margin: 0 auto;
     padding: 10px;
-    color: $title-option;
+    color: $text-1;
+
+    > div {
+        height: 100%;
+    }
 
     &__wrapper {
+        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;

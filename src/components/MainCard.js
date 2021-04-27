@@ -5,7 +5,7 @@ const MainCard = ({data = {}, selectPlan}) => {
     
     return (
         <div className="program_search__main_card">
-            <Grid container spacing={2}>
+            <Grid container>
                 <Grid item xs={6}>
                     <div className="program_search__main_left">
                         <p className="main_left__service">Servicio Privado con Guia</p>
@@ -33,7 +33,7 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam onumy eirmod t
                     </div>
                 </Grid>
             </Grid>
-            <Grid container spacing={2}>
+            <Grid container>
                 <div className="program_search__card_footer">
                     <div className="program_search__card_footer_left">
                         <div className="program_search__card-pago">

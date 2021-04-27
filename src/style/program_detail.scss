@@ -3,7 +3,7 @@
 .program_detail {
     color: $text-1;
     text-align: left;
-    margin: 0 auto;
+    margin: 8px auto 0;
 
     &__wrapper {
         width: 930px;
@@ -12,65 +12,78 @@
     &__header {
         background: url("../assets/44.jpeg");
         background-size: cover;
-
-        &_title {
-            font-size: 3em;
-            color: $font-light;
-        }
-    }
-
-    &__main_left {
+        height: 265px;
         color: $font-light;
         display: flex;
-        flex-direction: column;
-        
-        > p {
+        justify-content: space-between;
+        padding: 40px 45px 0;
+        box-sizing: border-box;
+
+        &_title {
+            max-width: 450px;
+            font-size: 3em;
+            font-weight: 700;
+        }
+
+        &_service {
             margin-top: auto;
-            align-items: flex-end;
-            align-self: flex-end;
-            justify-content: flex-end;
-        }
-    }
-    
-    & .MuiGrid-item:first-child {
-        background: url("../assets/44.jpeg");
-        background-size: cover;
-    }
-
-    &__main_right {
-        h3 {
-            margin: 0 0 40px;
-        }
-
-        &__extras {
-            display: flex;
-            font-size: 12px;
-            justify-content: space-between;
         }
     }
 
-    &__main_descripcion {
-        font-size: 14px;
+    &__extras {
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        align-items: center;
+        padding: 0 45px;
     }
 
-    &__card {
-        &_footer {
-            background-color: $light-blue;
-            color: $font-light;
-            display: flex;
-            justify-content: space-between;
-            padding: 9px 40px;
-            font-size: 1em;
-            width: 100%;
+    & .extras {
+        &_left {
 
-            > div {
-                display: flex;
-                align-items: center;
+        }
+
+        &_right {
+            text-align: right;
+
+            & .extras_pago {
+                & span:not(:first-child) {
+                    margin-left: 5px;
+                }
+            }
+
+            & .extras_action {
+                margin-top: 5px;
+
+                button {
+                    background-color: $secondary-color;
+                    width: 100px;
+                    height: 30px;
+                    color: $font-light;
+                    border: none;
+                    margin-left: 5px;
+                }
             }
         }
+    }
 
-        &--forma_pago {
-            margin-left: 20px;
+    &__body {
+        & header {
+            height: 100%;
+        }
+
+        > div {
+            border: 1px #82C6D9 solid;
+        }
+
+    }
+    &__itinerario {
+        &_header {
+            display: flex;
+
+            & .itinerario_dia {
+                margin-right: 40px;
+            }
         }
     }
 }

@@ -57,7 +57,6 @@ export const Services = ({values}) => {
                                 <div className="services__opcion_container">
                                     <p>Traslado</p>
                                     <Checkbox
-                                        defaultChecked
                                         color="primary"
                                         inputProps={{ 'aria-label': 'secondary checkbox' }}
                                     />
@@ -65,7 +64,6 @@ export const Services = ({values}) => {
                                 <div className="services__opcion_container">
                                     <p>Shows</p>
                                     <Checkbox
-                                        defaultChecked
                                         color="primary"
                                         inputProps={{ 'aria-label': 'secondary checkbox' }}
                                     />
@@ -73,7 +71,6 @@ export const Services = ({values}) => {
                                 <div className="services__opcion_container">
                                     <p>Excursiones</p>
                                     <Checkbox
-                                        defaultChecked
                                         color="primary"
                                         inputProps={{ 'aria-label': 'secondary checkbox' }}
                                     />
@@ -85,7 +82,6 @@ export const Services = ({values}) => {
                             <div className="services__opcion_tipo_servicio">
                                 <span>Privado con guía</span>
                                 <Checkbox
-                                    defaultChecked
                                     color="primary"
                                     inputProps={{ 'aria-label': 'secondary checkbox' }}
                                 />
@@ -93,7 +89,6 @@ export const Services = ({values}) => {
                             <div className="services__opcion_tipo_servicio">
                                 <span>Privado sin guía</span>
                                 <Checkbox
-                                    defaultChecked
                                     color="primary"
                                     inputProps={{ 'aria-label': 'secondary checkbox' }}
                                 />
@@ -101,7 +96,6 @@ export const Services = ({values}) => {
                             <div className="services__opcion_tipo_servicio">
                                 <span>Regular</span>
                                 <Checkbox
-                                    defaultChecked
                                     color="primary"
                                     inputProps={{ 'aria-label': 'secondary checkbox' }}
                                 />

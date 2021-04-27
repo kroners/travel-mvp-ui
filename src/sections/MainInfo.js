@@ -9,6 +9,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
+  DateRangePicker,
 } from '@material-ui/pickers';
 import CustomInput from '../components/CustomInput';
 
@@ -59,31 +60,34 @@ function MainInfo({values}) {
                             </div>
                             <div className="main_info__destino_body">
                                 {destinationList.length > 0 && 
-                                    destinationList.map((el, i) => {
-                                        return (
-                                            <div className="main_info__destino_body_element">
-                                                <TextField 
-                                                    id={`destino-input-${i}`}
-                                                    label={destinationList.length === 1 ? "Destino" : `Destino #${i+1}`}
-                                                    variant="outlined"
-                                                    className="general__input_field"
-                                                    onChange={e => handleDestinationChange(e, i)}
+                                destinationList.map((el, i) => {
+                                    return (
+                                        <div className="main_info__destino_body_element">
+                                            <TextField 
+                                                id={`destino-input-${i}`}
+                                                label={destinationList.length === 1 ? "Destino" : `Destino #${i+1}`}
+                                                variant="outlined"
+                                                className="general__input_field"
+                                                onChange={e => handleDestinationChange(e, i)}
+                                            />
+                                            {el && el.destination &&
+                                            destinationList.length > 1 && 
+                                                <RemoveCircleIcon 
+                                                    className="fill_circle_primary" 
+                                                    onClick={() => handleRemoveClick(i)}
                                                 />
-                                                {el && el.destination && 
-                                                    <RemoveCircleIcon 
-                                                        className="fill_circle_primary" 
-                                                        onClick={() => handleRemoveClick(i)}
-                                                    />
-                                                }
-                                                {destinationList.length === i + 1 && 
-                                                    <AddCircleIcon 
-                                                        className="fill_circle_primary" 
-                                                        onClick={() => handleAddDestination()}
-                                                    />
-                                                }
-                                            </div>
-                                        )
-                                    })
+                                            }
+                                            {el.destination &&
+                                            destinationList.length === i + 1 &&
+                                            destinationList.length <= 3  && 
+                                                <AddCircleIcon 
+                                                    className="fill_circle_primary" 
+                                                    onClick={() => handleAddDestination()}
+                                                />
+                                            }
+                                        </div>
+                                    )
+                                })
                                 }
                             </div>
                         </div>

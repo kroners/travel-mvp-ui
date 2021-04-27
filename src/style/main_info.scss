@@ -26,9 +26,21 @@
         &_header,
         &_body {
             display: flex;
-            align-items: center;
             > div:not(:last-child) {
                 margin-right: 10px;
+            }
+        }
+
+        &_body {
+            flex-direction: column;
+            
+            &_element {
+                display: flex;
+                align-items: center;
+
+                &:not(:last-child) {
+                    margin-bottom: 10px;
+                }
             }
         }
     }

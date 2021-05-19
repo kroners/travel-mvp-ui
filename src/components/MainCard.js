@@ -42,8 +42,8 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam onumy eirmod t
                         <div className="program_search__card--forma_pago">Forma de Pago</div>
                     </div>
                     <div className="program_search__card_footer_right">
-                        <Button className="program_search__main__ver_detalle__button">Ver detalle</Button>
-                        <Button className="program_search__main__selecciona__button" onClick={() => selectPlan(1)}>Seleccionar</Button>
+                        <Button className="program_search__main__ver_detalle__button" onClick={() => selectPlan(1)}>Ver detalle</Button>
+                        <Button className="program_search__main__selecciona__button">Seleccionar</Button>
                     </div>
                 </div>
             </Grid>

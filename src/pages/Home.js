@@ -121,7 +121,7 @@ const Home = () => {
           {innerSectionForm}
         </div>
         <div className="home__move_buttons">
-          <Button variant="outlined" onClick={() => handlePrevSelect()}>Atras</Button>
+          <Button disabled={step===1} variant="outlined" onClick={() => handlePrevSelect()}>Atras</Button>
           {step !== 3 && <Button variant="outlined" onClick={() => handleNextSelect()}>Siguiente</Button>}
           {step === 3 && <Button variant="outlined" onClick={() => handleSubmit()}>Consultar</Button>}
         </div>

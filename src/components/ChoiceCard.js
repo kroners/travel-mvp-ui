@@ -1,7 +1,6 @@
 import { Button, Grid } from "@material-ui/core";
 
 const ChoiceCard = ({data}) => {
-    console.log({data})
 
     return (
         <div className="program_search__choice_card">

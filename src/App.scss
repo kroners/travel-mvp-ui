@@ -9,10 +9,13 @@ header {
 
 footer {
     background-color: $footer-color;
-    height: 40px;
     margin-top: 40px;
     & .footer__body {
-        height: 100%;
+        color: $font-light;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40px;
     }
 }
 

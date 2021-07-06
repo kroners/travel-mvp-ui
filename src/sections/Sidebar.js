@@ -105,7 +105,6 @@ const Sidebar = () => {
         <div className="sidebar__wrapper">
             <CssBaseline />
       <AppBar
-        position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}

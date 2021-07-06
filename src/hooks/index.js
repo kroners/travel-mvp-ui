@@ -6,7 +6,6 @@ import { filterOptions } from '../helpers'
 
 export const useProjects = () => {
   const [projects, setProjects] = useState([])
-  console.log({ hooksProjects: projects })
 
   // useEffect(() => {
   //   let promesaResuelta = Promise.resolve(true)
@@ -29,12 +28,10 @@ export const useProjects = () => {
 
 export const useFilters = () => {
   const [filters, setFilters] = useState(filterOptions);
-  console.log({ filters })
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(`${TRAVEL_API}/activities`);
-      console.log({ result })
       setFilters(result.data);
     };
 

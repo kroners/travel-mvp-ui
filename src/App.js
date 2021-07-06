@@ -9,9 +9,7 @@ import Footer from './components/Footer'
 import { ProjectProvider } from './context'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core'
 import './App.scss';
-import variables from './style/variables.scss';
-
-console.log({ variables })
+import { SelectedFiltersProvider } from './context/selected-filters-context'
 
 const theme = createMuiTheme({
   palette: {
@@ -27,18 +25,20 @@ const theme = createMuiTheme({
 const App = () => (
   <ThemeProvider theme={theme}>
     <ProjectProvider>
-      <BrowserRouter>
-        <>
-          <Header />
-          <Switch>
-            <Route path="/programs" exact component={ProgramSearch} />
-            <Route path="/programs/:programsId" exact component={ProgramDetail} />
-            <Route path="/contact-agent" exact component={ContactAgent} />
-            <Route path="/" exact component={Home} />
-          </Switch>
-          <Footer />
-        </>
-      </BrowserRouter>
+      <SelectedFiltersProvider>
+        <BrowserRouter>
+          <>
+            <Header />
+            <Switch>
+              <Route path="/programs" exact component={ProgramSearch} />
+              <Route path="/programs/:programsId" exact component={ProgramDetail} />
+              <Route path="/contact-agent" exact component={ContactAgent} />
+              <Route path="/" exact component={Home} />
+            </Switch>
+            <Footer />
+          </>
+        </BrowserRouter>
+      </SelectedFiltersProvider>
     </ProjectProvider>
   </ThemeProvider>
 );

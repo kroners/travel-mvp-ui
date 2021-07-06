@@ -2,7 +2,8 @@ import React, { createContext, useContext } from 'react'
 import PropTypes from 'prop-types'
 import { useProjects, useFilters, useConfig } from '../hooks'
 
-export const ProjectContext = createContext()
+export const ProjectContext = createContext();
+
 export const ProjectProvider = ({ children }) => {
   const { config, setConfig } = useConfig()
   const { project, setProject } = useProjects()
@@ -10,7 +11,7 @@ export const ProjectProvider = ({ children }) => {
 
   return (
     <ProjectContext.Provider value={{ 
-      projectValue: { project, setProject },
+      projectValues: { project, setProject },
       filtersValues: { filters, setFilters },
       configValues: { config, setConfig },
     }}>

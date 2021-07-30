@@ -1,37 +1,74 @@
-@import "./variables";
+@import './variables';
 
 .services {
-    background-color: $wizard-color;
-    max-width: 1040px;
-    max-height: 600px;
-    text-align: left;
-    margin: 0 auto;
-    padding: 10px;
-    color: $text-1;
+  background-color: $wizard-color;
+  max-width: 1040px;
+  max-height: 600px;
+  text-align: left;
+  margin: 0 auto;
+  padding: 10px;
+  color: $text-1;
 
-    &__cantidad_adultos,
-    &__cantidad_ninos,
-    &__cantidad_bebes,
-    &__opciones_wrapper,
-    &__opcion_container,
-    &__opcion_tipo_servicio {
-        display: flex;
+  &__cantidad_adultos,
+  &__cantidad_ninos,
+  &__cantidad_bebes,
+  &__opciones_wrapper,
+  &__opcion_container,
+  &__opcion_tipo_servicio {
+    display: flex;
+  }
+
+  &__opcion_container_traslado {
+    background-image: url('../assets/aeropuerto recojo.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100px;
+    width: 160px;
+    margin-right: 0;
+    color: white;
+
+    &:not(:last-child) {
+      margin-right: 10px;
     }
+  }
 
-    &__opcion_container {
-        background-color: $empty-space-gray;
-        height: 100px;
-        width: 160px;
-        margin-right: 0;
+  &__opcion_container_shows {
+    background-image: url('../assets/show1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100px;
+    width: 160px;
+    margin-right: 0;
+    color: white;
 
-        &:not(:last-child) {
-            margin-right: 10px;
-        }
+    &:not(:last-child) {
+      margin-right: 10px;
     }
+  }
 
-    &__side_text {
-        background-color: $empty-space-gray;
-        height: 100%;
-        width: 100%;
+  &__opcion_container_excursiones {
+    background-image: url('../assets/excursion.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100px;
+    width: 160px;
+    margin-right: 0;
+    color: white;
+
+    &:not(:last-child) {
+      margin-right: 10px;
     }
+  }
+
+  &__side_text {
+    background-image: url('../assets/grupal.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100%;
+    width: 100%;
+  }
 }

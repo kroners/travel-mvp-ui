@@ -1,0 +1,1 @@
+export const GET_DESTINATIONS = 'GET_DESTINATIONS';

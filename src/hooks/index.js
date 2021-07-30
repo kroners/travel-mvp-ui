@@ -1,11 +1,16 @@
 /* eslint-disable no-nested-ternary */
-import axios from 'axios'
-import { useState, useEffect } from 'react'
-import { TRAVEL_API } from '../api'
-import { filterOptions } from '../helpers'
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { TRAVEL_API } from '../api';
+import { filterOptions } from '../helpers';
 
 export const useProjects = () => {
+<<<<<<< HEAD
   const [projects, setProjects] = useState([])
+=======
+  const [projects, setProjects] = useState([]);
+  console.log({ hooksProjects: projects });
+>>>>>>> main
 
   // useEffect(() => {
   //   let promesaResuelta = Promise.resolve(true)
@@ -23,29 +28,37 @@ export const useProjects = () => {
   //     })
   // }, [projects])
 
-  return { projects, setProjects }
-}
+  return { projects, setProjects };
+};
 
 export const useFilters = () => {
   const [filters, setFilters] = useState(filterOptions);
+<<<<<<< HEAD
+=======
+  console.log({ filters });
+>>>>>>> main
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(`${TRAVEL_API}/activities`);
+<<<<<<< HEAD
+=======
+      console.log({ result });
+>>>>>>> main
       setFilters(result.data);
     };
 
     fetchData();
-    }, [filters]);
+  }, [filters]);
 
-  return { filters, setFilters }
+  return { filters, setFilters };
 };
 
 export const useConfig = () => {
   const initialConfig = {
     selectedPage: 'packages',
-  }
+  };
   const [config, setConfig] = useState(initialConfig);
 
-  return { config, setConfig }
+  return { config, setConfig };
 };

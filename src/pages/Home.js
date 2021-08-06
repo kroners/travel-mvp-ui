@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import MainInfo from '../sections/MainInfo';
 import { Services } from '../sections/Services';
 import Accommodation from '../sections/Accommodation';
@@ -9,10 +9,14 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 //import { useProjectsValue } from '../context';
 import { useHistory } from 'react-router-dom';
+import TravelContext from '../context/Travel/TravelContext';
+import { SAVE_DESTINATIONS } from '../context/types';
 
 require('../style/home.scss');
 
 const Home = () => {
+  const { state } = useContext(TravelContext);
+  //console.log(useContext(TravelContext), 'useContext(TravelContext)');
   let innerSectionForm;
   let history = useHistory();
   //  const {
@@ -20,12 +24,18 @@ const Home = () => {
   //  } = useProjectsValue();
 
   const [step, setStep] = useState(0);
+  const [getDataDestination, setGetDataDestination] = useState({});
   const stepsInfo = ['Informacion principal', 'Servicios', 'Hospedaje', 'Datos adicionales'];
+
+  const test = () => {
+    console.log('object');
+  };
 
   // Proceed to next step
   const handleNextSelect = () => {
     let nextStep = step + 1;
     setStep(nextStep);
+    test();
   };
 
   // Go back to prev step
@@ -36,7 +46,8 @@ const Home = () => {
 
   // Handle fields change
   const handleSubmit = (input) => {
-    history.push('/programs');
+    //history.push('/programs');
+    alert(JSON.stringify(state.saveDestinations));
   };
 
   // const handleChange = () => {
@@ -86,21 +97,8 @@ const Home = () => {
         <div className='home__header-title'>
           <h1>SHOW EN LA HABANA</h1>
         </div>
-<<<<<<< HEAD
-        <div className="home__stepper--mobile">
-          <CircularProgressWithLabel value={25} />;
-        </div>
-        <div className="home__body">
-          {innerSectionForm}
-        </div>
-        <div className="home__move_buttons">
-          <Button disabled={step===1} variant="outlined" onClick={() => handlePrevSelect()}>Atras</Button>
-          {step !== 3 && <Button variant="outlined" onClick={() => handleNextSelect()}>Siguiente</Button>}
-          {step === 3 && <Button variant="outlined" onClick={() => handleSubmit()}>Consultar</Button>}
-=======
         <div className='home__header-detail'>
           <p>A donde quieres ir?</p>
->>>>>>> main
         </div>
       </div>
       <div className='home__stepper'>

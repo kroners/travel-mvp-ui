@@ -3,17 +3,24 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import { TextField } from '@material-ui/core';
 import serach_bar from '../style/search_bar.scss';
 import SearchIcon from '@material-ui/icons/Search';
+import CustomInput from '../components/CustomInput';
 
 import ListItemText from '@material-ui/core/ListItemText';
 
-const SearchBar = ({ placeholder, data }) => {
+const SearchBar = ({
+  placeholder,
+  data,
+  wordEntered,
+  getWordEntered,
+  setdestinationFromSearch,
+}) => {
   const [filteredData, setFilteredData] = useState([]);
-  const [wordEntered, setWordEntered] = useState('');
   const [showReview, setShowReview] = useState(false);
   const [summary, setSummary] = useState([]);
+
   const handleFilter = (event) => {
     const searchWord = event.target.value;
-    setWordEntered(searchWord);
+    getWordEntered(searchWord);
     const newFilter = data.filter((value) => {
       return value.nombre.toLowerCase().includes(searchWord.toLowerCase());
     });
@@ -23,24 +30,17 @@ const SearchBar = ({ placeholder, data }) => {
     } else {
       setFilteredData(newFilter);
       setSummary(newFilter);
+      setdestinationFromSearch(newFilter);
     }
   };
-  console.log('filteredData', filteredData);
 
-  const clearInput = () => {
-    setFilteredData([]);
-    setWordEntered('');
-  };
-
-  const fillInput = (wordEntered) => {
-    setWordEntered(wordEntered);
+  const fillInput = (value) => {
+    getWordEntered(value);
     setShowReview(true);
 
     setFilteredData([]);
   };
-  console.log(showReview);
-  console.log(summary);
-
+  console.log(filteredData, 'filteredData');
   return (
     <div className='search'>
       <div className='searchInputs'>
@@ -75,14 +75,41 @@ const SearchBar = ({ placeholder, data }) => {
         </div>
       )}
       {showReview !== false && (
-        <div className='accordion'>
+        <div className='accordion' style={{ marginTop: '2vh', width: '100%' }}>
           {summary.map((value, i) => {
             if (value.nombre === wordEntered) {
               return (
-                <div key={i} style={{ display: 'flex', justifyContent: 'space-around' }}>
-                  <p> {value.pais.nombre}</p>
-                  <p>{value.ciudad.nombre}</p>
-                  <p> Region </p>
+                <div
+                  key={i}
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr 1fr',
+                    gap: '10px',
+                    justifyContent: 'space-between',
+                  }}>
+                  <CustomInput
+                    disabled={true}
+                    id='duracion-input'
+                    label='Duracion'
+                    className='general__input_field'
+                    value={value.pais.nombre}
+                  />
+
+                  <CustomInput
+                    disabled={true}
+                    id='duracion-input'
+                    label='Duracion'
+                    className='general__input_field'
+                    value={value.ciudad.nombre}
+                  />
+
+                  <CustomInput
+                    disabled={true}
+                    id='duracion-input'
+                    label='Duracion'
+                    className='general__input_field'
+                    value={value.region.nombre}
+                  />
                 </div>
               );
             }

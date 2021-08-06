@@ -1,11 +1,25 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import { Button, ButtonGroup, Checkbox, FormControlLabel } from '@material-ui/core';
+import TravelContext from '../context/Travel/TravelContext';
+import { SAVE_DESTINATIONS } from '../context/types';
 
 require('../style/services.scss');
 
 export const Services = () => {
+  const { dispatch, state } = useContext(TravelContext);
+
+  const [traslados, setTraslados] = useState(false);
+  const [shows, setShows] = useState(false);
+  const [excursiones, setExcursiones] = useState(false);
+  const [conGuia, setConGuia] = useState(false);
+  const [sinGuia, setSinGuia] = useState(false);
+  const [regular, setRegular] = useState(false);
+  const [disableConGuia, setDisableConGuia] = useState(false);
+  const [disableSinGuia, setDisableSinGuia] = useState(false);
+  const [disableRegular, setDisableRegular] = useState(false);
+
   const initialState = {
     counter: 0,
   };
@@ -27,110 +41,88 @@ export const Services = () => {
     }
   };
 
-<<<<<<< HEAD
-    const handleDecrement = () => {
-        
+  const [adultos, dispatchAdultos] = useReducer(reducer, initialState);
+  const [niños, dispatchNiños] = useReducer(reducer, initialState);
+  const [bebes, dispatchBebes] = useReducer(reducer, initialState);
+
+  const handleTraslados = (e) => {
+    setTraslados(e.target.checked);
+  };
+
+  const handleShows = (e) => {
+    setShows(e.target.checked);
+  };
+
+  const handleExcursiones = (e) => {
+    setExcursiones(e.target.checked);
+  };
+
+  const handleConGuia = (e) => {
+    setConGuia(e.target.checked);
+    if (conGuia !== true) {
+      setDisableSinGuia(true);
+      setDisableRegular(true);
+    } else {
+      setDisableSinGuia(false);
+      setDisableRegular(false);
     }
+  };
 
-    return (
-        <div className="services">
-            <Grid container spacing={2}>
-                <Grid item xs={6}>
-                    <div className="services__wrapper">
-                        <div className="services__destino">
-                            <div className="services__cantidad_personas">
-                                <h3>Cantidad de personas</h3>
-                                <div className="services__cantidad_adultos">
-                                    <span>Adultos (12 a más)</span>
-                                    <ButtonGroup size="small" aria-label="small outlined button group">
-                                        <Button onClick={handleIncrement}>+</Button>
-                                        <Button disabled>{adultos}</Button>
-                                        <Button onClick={handleDecrement}>-</Button>
-                                    </ButtonGroup>
-                                </div>
-                                <div className="services__cantidad_ninos">
-                                    <span>Niños (2 - 12)</span>
-                                    <ButtonGroup size="small" aria-label="small outlined button group">
-                                        <Button onClick={handleIncrement}>+</Button>
-                                        <Button disabled>{ninos}</Button>
-                                        <Button onClick={handleDecrement}>-</Button>
-                                    </ButtonGroup>
-                                </div>
-                                <div className="services__cantidad_bebes">
-                                    <span>Bebes (0 - 2)</span>
-                                    <ButtonGroup size="small" aria-label="small outlined button group">
-                                        <Button onClick={handleIncrement}>+</Button>
-                                        <Button disabled>{bebes}</Button>
-                                        <Button onClick={handleDecrement}>-</Button>
-                                    </ButtonGroup>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="services__opciones">
-                            <h3>Servicios</h3>
-                            <div className="services__opciones_wrapper">
-                                <div className="services__opcion_container">
-                                    <p>Traslado</p>
-                                    <Checkbox
-                                        color="primary"
-                                        inputProps={{ 'aria-label': 'secondary checkbox' }}
-                                    />
-                                </div>
-                                <div className="services__opcion_container">
-                                    <p>Shows</p>
-                                    <Checkbox
-                                        color="primary"
-                                        inputProps={{ 'aria-label': 'secondary checkbox' }}
-                                    />
-                                </div>
-                                <div className="services__opcion_container">
-                                    <p>Excursiones</p>
-                                    <Checkbox
-                                        color="primary"
-                                        inputProps={{ 'aria-label': 'secondary checkbox' }}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="services__tipo_servicio">
-                            <h3>Tipo de servicio</h3>
-                            <div className="services__opcion_tipo_servicio">
-                                <span>Privado con guía</span>
-                                <Checkbox
-                                    color="primary"
-                                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                                />
-                            </div>
-                            <div className="services__opcion_tipo_servicio">
-                                <span>Privado sin guía</span>
-                                <Checkbox
-                                    color="primary"
-                                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                                />
-                            </div>
-                            <div className="services__opcion_tipo_servicio">
-                                <span>Regular</span>
-                                <Checkbox
-                                    color="primary"
-                                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </Grid>
-                <Grid item xs={6}>
-                    <div className="services__side_text"></div>
-                </Grid>
-            </Grid>
-        </div>
-    )
-}
+  const handleSinGuia = (e) => {
+    setSinGuia(e.target.checked);
+    if (sinGuia !== true) {
+      setDisableConGuia(true);
+      setDisableRegular(true);
+    } else {
+      setDisableConGuia(false);
+      setDisableRegular(false);
+    }
+  };
 
-=======
-  const [state1, dispatch1] = useReducer(reducer, initialState);
-  const [state2, dispatch2] = useReducer(reducer, initialState);
-  const [state3, dispatch3] = useReducer(reducer, initialState);
->>>>>>> main
+  const handleRegular = (e) => {
+    setRegular(e.target.checked);
+    if (regular !== true) {
+      setDisableSinGuia(true);
+      setDisableConGuia(true);
+    } else {
+      setDisableSinGuia(false);
+      setDisableConGuia(false);
+    }
+  };
+
+  useEffect(() => {
+    dispatch({
+      type: SAVE_DESTINATIONS,
+      payload: {
+        ...state.saveDestinations,
+        traslados,
+        shows,
+        excursiones,
+        conGuia,
+        sinGuia,
+        regular,
+        disableConGuia,
+        disableSinGuia,
+        disableRegular,
+        adultos: adultos.counter,
+        niños: niños.counter,
+        bebes: bebes.counter,
+      },
+    });
+  }, [
+    traslados,
+    shows,
+    excursiones,
+    conGuia,
+    sinGuia,
+    regular,
+    disableConGuia,
+    disableSinGuia,
+    disableRegular,
+    adultos,
+    niños,
+    bebes,
+  ]);
 
   return (
     <div className='services'>
@@ -154,9 +146,13 @@ export const Services = () => {
                     Adultos (12 a más)
                   </span>
                   <ButtonGroup size='small' aria-label='small outlined button group'>
-                    <Button onClick={() => dispatch1({ type: 'increment', payload: 1 })}>+</Button>
-                    <Button disabled>{state1.counter}</Button>
-                    <Button onClick={() => dispatch1({ type: 'decrement', payload: 1 })}>-</Button>
+                    <Button onClick={() => dispatchAdultos({ type: 'increment', payload: 1 })}>
+                      +
+                    </Button>
+                    <Button disabled>{adultos.counter}</Button>
+                    <Button onClick={() => dispatchAdultos({ type: 'decrement', payload: 1 })}>
+                      -
+                    </Button>
                   </ButtonGroup>
                 </div>
                 <div className='services__cantidad_ninos'>
@@ -170,9 +166,13 @@ export const Services = () => {
                     Niños (2 - 12)
                   </span>
                   <ButtonGroup size='small' aria-label='small outlined button group'>
-                    <Button onClick={() => dispatch2({ type: 'increment', payload: 1 })}>+</Button>
-                    <Button disabled>{state2.counter}</Button>
-                    <Button onClick={() => dispatch2({ type: 'decrement', payload: 1 })}>-</Button>
+                    <Button onClick={() => dispatchNiños({ type: 'increment', payload: 1 })}>
+                      +
+                    </Button>
+                    <Button disabled>{niños.counter}</Button>
+                    <Button onClick={() => dispatchNiños({ type: 'decrement', payload: 1 })}>
+                      -
+                    </Button>
                   </ButtonGroup>
                 </div>
                 <div className='services__cantidad_bebes'>
@@ -186,9 +186,13 @@ export const Services = () => {
                     Bebes (0 - 2)
                   </span>
                   <ButtonGroup size='small' aria-label='small outlined button group'>
-                    <Button onClick={() => dispatch3({ type: 'increment', payload: 1 })}>+</Button>
-                    <Button disabled>{state3.counter}</Button>
-                    <Button onClick={() => dispatch3({ type: 'decrement', payload: 1 })}>-</Button>
+                    <Button onClick={() => dispatchBebes({ type: 'increment', payload: 1 })}>
+                      +
+                    </Button>
+                    <Button disabled>{bebes.counter}</Button>
+                    <Button onClick={() => dispatchBebes({ type: 'decrement', payload: 1 })}>
+                      -
+                    </Button>
                   </ButtonGroup>
                 </div>
               </div>
@@ -202,6 +206,7 @@ export const Services = () => {
                       labelPlacement='start'
                       control={
                         <Checkbox
+                          onChange={handleTraslados}
                           color='primary'
                           inputProps={{ 'aria-label': 'secondary checkbox' }}
                         />
@@ -216,6 +221,7 @@ export const Services = () => {
                       labelPlacement='start'
                       control={
                         <Checkbox
+                          onChange={handleShows}
                           color='primary'
                           inputProps={{ 'aria-label': 'secondary checkbox' }}
                         />
@@ -230,6 +236,7 @@ export const Services = () => {
                       labelPlacement='start'
                       control={
                         <Checkbox
+                          onChange={handleExcursiones}
                           color='primary'
                           inputProps={{ 'aria-label': 'secondary checkbox' }}
                         />
@@ -252,7 +259,12 @@ export const Services = () => {
                   }}>
                   Privado con guía
                 </span>
-                <Checkbox color='primary' inputProps={{ 'aria-label': 'secondary checkbox' }} />
+                <Checkbox
+                  onChange={handleConGuia}
+                  disabled={disableConGuia}
+                  color='primary'
+                  inputProps={{ 'aria-label': 'secondary checkbox' }}
+                />
               </div>
               <div className='services__opcion_tipo_servicio'>
                 <span
@@ -264,7 +276,12 @@ export const Services = () => {
                   }}>
                   Privado sin guía
                 </span>
-                <Checkbox color='primary' inputProps={{ 'aria-label': 'secondary checkbox' }} />
+                <Checkbox
+                  onChange={handleSinGuia}
+                  disabled={disableSinGuia}
+                  color='primary'
+                  inputProps={{ 'aria-label': 'secondary checkbox' }}
+                />
               </div>
               <div className='services__opcion_tipo_servicio'>
                 <span
@@ -276,7 +293,12 @@ export const Services = () => {
                   }}>
                   Regular
                 </span>
-                <Checkbox color='primary' inputProps={{ 'aria-label': 'secondary checkbox' }} />
+                <Checkbox
+                  onChange={handleRegular}
+                  disabled={disableRegular}
+                  color='primary'
+                  inputProps={{ 'aria-label': 'secondary checkbox' }}
+                />
               </div>
             </div>
           </div>

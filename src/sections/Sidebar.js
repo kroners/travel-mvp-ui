@@ -16,12 +16,10 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
-
 import StarsIcon from '@material-ui/icons/Stars';
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
+import SupervisedUserCircleOutlinedIcon from '@material-ui/icons/SupervisedUserCircleOutlined';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -190,43 +188,21 @@ const Sidebar = () => {
         <List>
           <ListItem button>
             <ListItemIcon>
-              <StarsIcon />
+              <SupervisedUserCircleOutlinedIcon />
             </ListItemIcon>
-            <ListItemText primary='Personas' />
+            <ListItemText primary='Personas (2)' />
           </ListItem>
           <ListItem button>
             <ListItemIcon>
               <StarsIcon />
             </ListItemIcon>
-            <ListItemText primary='Servicios' />
+            <ListItemText primary='Servicios (2/3)' />
           </ListItem>
           <ListItem button>
             <ListItemIcon>
               <StarsIcon />
             </ListItemIcon>
-            <ListItemText primary='Tipo de servicio' />
-          </ListItem>
-        </List>
-
-        <Divider />
-        <List>
-          <ListItem button>
-            <ListItemIcon>
-              <StarsIcon />
-            </ListItemIcon>
-            <ListItemText primary='Hospedaje' />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <StarsIcon />
-            </ListItemIcon>
-            <ListItemText primary='Tipo de habitacion' />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <StarsIcon />
-            </ListItemIcon>
-            <ListItemText primary='Alimentacion' />
+            <ListItemText primary='Tipo de servicio (1/3)' />
           </ListItem>
         </List>
 
@@ -236,19 +212,41 @@ const Sidebar = () => {
             <ListItemIcon>
               <StarsIcon />
             </ListItemIcon>
-            <ListItemText primary='Actividades' />
+            <ListItemText primary='Hospedaje (1/3)' />
           </ListItem>
           <ListItem button>
             <ListItemIcon>
               <StarsIcon />
             </ListItemIcon>
-            <ListItemText primary='Perfil de viaje' />
+            <ListItemText primary='Tipo de habitacion (1/3)' />
           </ListItem>
           <ListItem button>
             <ListItemIcon>
               <StarsIcon />
             </ListItemIcon>
-            <ListItemText primary='Idioma' />
+            <ListItemText primary='Alimentacion (1/3)' />
+          </ListItem>
+        </List>
+
+        <Divider />
+        <List>
+          <ListItem button>
+            <ListItemIcon>
+              <StarsIcon />
+            </ListItemIcon>
+            <ListItemText primary='Actividades (4/11)' />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <StarsIcon />
+            </ListItemIcon>
+            <ListItemText primary='Perfil de viaje (2/3)' />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <StarsIcon />
+            </ListItemIcon>
+            <ListItemText primary='Idioma  Español' />
           </ListItem>
         </List>
       </Drawer>

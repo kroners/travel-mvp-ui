@@ -57,7 +57,7 @@ function AdditionalInfo() {
   return (
     <div className='additional_info'>
       <Grid container spacing={2}>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <div className='additional_info__wrapper'>
             <div className='additional_info__actividades'>
               <div className='additional_info__actividades_header'>

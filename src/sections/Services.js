@@ -127,7 +127,7 @@ export const Services = () => {
   return (
     <div className='services'>
       <Grid container spacing={2}>
-        <Grid item xs={6}>
+        <Grid item md={6} xs={12}>
           <div className='services__wrapper'>
             <div className='services__destino'>
               <div className='services__cantidad_personas'>

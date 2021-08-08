@@ -149,7 +149,7 @@ function Accommadation() {
   return (
     <div className='accommodation'>
       <Grid container spacing={2}>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <div className='accommodation__wrapper'>
             <div className='accommodation__tipo_hospedaje'>
               <h3>Tipo de hospedaje</h3>

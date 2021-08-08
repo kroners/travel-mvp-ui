@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import MainInfo from '../sections/MainInfo';
 import { Services } from '../sections/Services';
 import Accommodation from '../sections/Accommodation';
@@ -7,24 +7,15 @@ import { Button, Step, StepLabel, Stepper } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-//import { useProjectsValue } from '../context';
-import { useHistory } from 'react-router-dom';
-import TravelContext from '../context/Travel/TravelContext';
-import { SAVE_DESTINATIONS } from '../context/types';
 
+import { useHistory } from 'react-router-dom';
 require('../style/home.scss');
 
 const Home = () => {
-  const { state } = useContext(TravelContext);
-  //console.log(useContext(TravelContext), 'useContext(TravelContext)');
   let innerSectionForm;
   let history = useHistory();
-  //  const {
-  //    filtersValues: { filters },
-  //  } = useProjectsValue();
 
   const [step, setStep] = useState(0);
-  const [getDataDestination, setGetDataDestination] = useState({});
   const stepsInfo = ['Informacion principal', 'Servicios', 'Hospedaje', 'Datos adicionales'];
 
   const test = () => {
@@ -49,10 +40,6 @@ const Home = () => {
     history.push('/programs');
     //  alert(JSON.stringify(state.saveDestinations));
   };
-
-  // const handleChange = () => {
-  //   console.log("handleChange")
-  // }
 
   const CircularProgressWithLabel = (props) => {
     return (

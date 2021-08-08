@@ -142,18 +142,7 @@ function Accommadation() {
         triple,
       },
     });
-  }, [
-    estandar,
-    confort,
-    lujo,
-    soloDesayuno,
-    mediaPension,
-    pensionCompleta,
-    single,
-    doble,
-    triple,
-    state,
-  ]);
+  }, [estandar, confort, lujo, soloDesayuno, mediaPension, pensionCompleta, single, doble, triple]);
 
   console.log(useContext(TravelContext), 'useContext(TravelContext)');
 

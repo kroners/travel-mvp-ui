@@ -71,7 +71,14 @@ function MainInfo({ values, handleNextSelect }) {
         presupuesto: budgetValue,
       },
     });
-  }, [wordEntered, selectedDateStart, selectedDateEnd, budgetValue]);
+  }, [
+    wordEntered,
+    selectedDateStart,
+    selectedDateEnd,
+    budgetValue,
+    destinationFromSearch,
+    dispatch,
+  ]);
 
   return (
     <div className='main_info'>

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme, withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -19,6 +19,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import Slider from '@material-ui/core/Slider';
 
 import StarsIcon from '@material-ui/icons/Stars';
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
@@ -83,10 +84,72 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginLeft: 0,
+  },
+  contentShift: {
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginLeft: +drawerWidth,
+    // backgroundColor: 'red',
   },
 }));
 
-const Sidebar = () => {
+const CustomSlider = withStyles({
+  root: {
+    color: '#3880ff',
+    height: 4,
+    padding: '15px 0',
+    marginRight: 10,
+  },
+  thumb: {
+    height: 10,
+    width: 10,
+    backgroundColor: '#fff',
+
+    marginTop: -4,
+    marginLeft: 0,
+    '&:focus, &:hover, &$active': {
+      boxShadow: '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
+      // Reset on touch devices, it doesn't add specificity
+      '@media (hover: none)': {},
+    },
+  },
+  active: {},
+  valueLabel: {
+    left: -10,
+    top: 10,
+    '& *': {
+      background: 'transparent',
+      color: '#000',
+    },
+  },
+  track: {
+    height: 3,
+  },
+  rail: {
+    height: 3,
+    opacity: 0.5,
+    backgroundColor: '#bfbfbf',
+  },
+  mark: {
+    backgroundColor: '#bfbfbf',
+    height: 8,
+    width: 1,
+    marginTop: -3,
+  },
+  markActive: {
+    opacity: 1,
+    backgroundColor: 'currentColor',
+  },
+})(Slider);
+
+const Sidebar = ({ children }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -97,6 +160,12 @@ const Sidebar = () => {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const [value, setValue] = React.useState([20, 37]);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
 
   return (
@@ -142,50 +211,126 @@ const Sidebar = () => {
         </div>
         <Divider />
         <List>
-          <div
-            style={{
-              padding: '10px',
-              backgroundColor: 'grey',
-              display: 'flex',
-              flexDirection: 'column',
-            }}>
-            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+          <ListItem button style={{ backgroundColor: 'grey' }}>
+            <ListItemIcon>
               <LocationOnIcon />
-              <p>Destino</p>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
-              <div style={{ backgroundColor: 'red', display: 'flex', flexDirection: 'row' }}>
-                <LocationOnIcon />
-              </div>
+            </ListItemIcon>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                width: '100%',
+              }}>
+              <div style={{ fontWeight: 'bold', fontSize: '12px' }}>Destino</div>
 
-              <div
-                style={{
-                  backgroundColor: 'green',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'flex-start',
-                }}>
-                <p>Destino</p>
-                <input style={{ width: '50%' }} />
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'row' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div
+                  style={{
+                    backgroundColor: 'white',
+                    borderRadius: '3px',
+                    padding: '2px',
+                    overflow: 'hidden',
+                    whiteSpace: 'nowrap',
+                    textOverflow: 'ellipsis',
+                    width: '100px',
+                    fontSize: '12px',
+                  }}>
+                  Argentina Buenos Aires Argentina Buenos Aires
+                </div>
                 <ControlPointIcon />
               </div>
             </div>
-          </div>
-          <ListItem button>
-            <ListItemIcon>
-              <LocationOnIcon />
-            </ListItemIcon>
-            <ListItemText primary='Fecha de viaje' />
           </ListItem>
-          <ListItem button>
+          <ListItem button style={{ backgroundColor: 'grey' }}>
             <ListItemIcon>
               <LocationOnIcon />
             </ListItemIcon>
-            <ListItemText primary='Presupuesto' />
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                width: '100%',
+              }}>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div style={{ fontWeight: 'bold', fontSize: '12px' }}>Fecha de viaje</div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <div
+                    style={{
+                      backgroundColor: 'white',
+                      borderRadius: '3px',
+                      padding: '2px',
+                      overflow: 'hidden',
+                      whiteSpace: 'nowrap',
+                      textOverflow: 'ellipsis',
+                      width: '80px',
+                      fontSize: '12px',
+                    }}>
+                    20 oct - 25 oct
+                  </div>
+                </div>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div style={{ fontWeight: 'bold', fontSize: '12px' }}>Duración</div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <div
+                    style={{
+                      backgroundColor: 'white',
+                      borderRadius: '3px',
+                      padding: '2px',
+                      overflow: 'hidden',
+                      whiteSpace: 'nowrap',
+                      textOverflow: 'ellipsis',
+                      width: '60px',
+                      fontSize: '12px',
+                    }}>
+                    5 dias
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ListItem>
+          <ListItem button style={{ backgroundColor: 'grey' }}>
+            <ListItemIcon>
+              <StarsIcon />
+            </ListItemIcon>
+
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                width: '100%',
+              }}>
+              <div style={{ fontWeight: 'bold', fontSize: '12px' }}>Presupuesto</div>
+              <div
+                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <CustomSlider
+                  value={value}
+                  onChange={handleChange}
+                  aria-labelledby='range-slider'
+                  getAriaValueText={''}
+                  max={5000}
+                  color='secondary'
+                  valueLabelDisplay='on'
+                />
+                <div
+                  style={{
+                    backgroundColor: 'white',
+                    borderRadius: '3px',
+                    padding: '2px',
+                    overflow: 'hidden',
+                    whiteSpace: 'nowrap',
+                    textOverflow: 'ellipsis',
+                    width: '80px',
+                    fontSize: '12px',
+                    height: '25px',
+                  }}>
+                  $ USD
+                </div>
+              </div>
+            </div>
           </ListItem>
         </List>
+
         <Divider />
         <List>
           <ListItem button>
@@ -252,6 +397,12 @@ const Sidebar = () => {
           </ListItem>
         </List>
       </Drawer>
+      <main
+        className={clsx(classes.content, {
+          [classes.contentShift]: open,
+        })}>
+        <div className={classes.drawerHeader}>{children}</div>
+      </main>
     </div>
   );
 };

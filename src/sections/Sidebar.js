@@ -18,7 +18,10 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 
+import StarsIcon from '@material-ui/icons/Stars';
+import ControlPointIcon from '@material-ui/icons/ControlPoint';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -139,21 +142,114 @@ const Sidebar = () => {
         </div>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <div
+            style={{
+              padding: '10px',
+              backgroundColor: 'grey',
+              display: 'flex',
+              flexDirection: 'column',
+            }}>
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+              <LocationOnIcon />
+              <p>Destino</p>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+              <div style={{ backgroundColor: 'red', display: 'flex', flexDirection: 'row' }}>
+                <LocationOnIcon />
+              </div>
+
+              <div
+                style={{
+                  backgroundColor: 'green',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'flex-start',
+                }}>
+                <p>Destino</p>
+                <input style={{ width: '50%' }} />
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <ControlPointIcon />
+              </div>
+            </div>
+          </div>
+          <ListItem button>
+            <ListItemIcon>
+              <LocationOnIcon />
+            </ListItemIcon>
+            <ListItemText primary='Fecha de viaje' />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <LocationOnIcon />
+            </ListItemIcon>
+            <ListItemText primary='Presupuesto' />
+          </ListItem>
         </List>
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem button>
+            <ListItemIcon>
+              <StarsIcon />
+            </ListItemIcon>
+            <ListItemText primary='Personas' />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <StarsIcon />
+            </ListItemIcon>
+            <ListItemText primary='Servicios' />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <StarsIcon />
+            </ListItemIcon>
+            <ListItemText primary='Tipo de servicio' />
+          </ListItem>
+        </List>
+
+        <Divider />
+        <List>
+          <ListItem button>
+            <ListItemIcon>
+              <StarsIcon />
+            </ListItemIcon>
+            <ListItemText primary='Hospedaje' />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <StarsIcon />
+            </ListItemIcon>
+            <ListItemText primary='Tipo de habitacion' />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <StarsIcon />
+            </ListItemIcon>
+            <ListItemText primary='Alimentacion' />
+          </ListItem>
+        </List>
+
+        <Divider />
+        <List>
+          <ListItem button>
+            <ListItemIcon>
+              <StarsIcon />
+            </ListItemIcon>
+            <ListItemText primary='Actividades' />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <StarsIcon />
+            </ListItemIcon>
+            <ListItemText primary='Perfil de viaje' />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <StarsIcon />
+            </ListItemIcon>
+            <ListItemText primary='Idioma' />
+          </ListItem>
         </List>
       </Drawer>
     </div>

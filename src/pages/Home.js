@@ -46,8 +46,8 @@ const Home = () => {
 
   // Handle fields change
   const handleSubmit = (input) => {
-    //history.push('/programs');
-    alert(JSON.stringify(state.saveDestinations));
+    history.push('/programs');
+    //  alert(JSON.stringify(state.saveDestinations));
   };
 
   // const handleChange = () => {

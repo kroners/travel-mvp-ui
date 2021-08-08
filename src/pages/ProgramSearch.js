@@ -42,7 +42,6 @@ const ProgramSearch = () => {
     <div className='program_search'>
       <div className='program_search__sidebar'>
         <Sidebar>
-          {' '}
           <div className='program_search__wrapper'>
             <h3>Resultado principal</h3>
             <MainCard selectPlan={selectPlan} />

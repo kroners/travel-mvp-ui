@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import clsx from 'clsx';
 import { makeStyles, useTheme, withStyles } from '@material-ui/core/styles';
@@ -18,10 +18,12 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import Slider from '@material-ui/core/Slider';
+import moment from 'moment';
 
 import StarsIcon from '@material-ui/icons/Stars';
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import SupervisedUserCircleOutlinedIcon from '@material-ui/icons/SupervisedUserCircleOutlined';
+import TravelContext from '../context/Travel/TravelContext';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -154,6 +156,7 @@ const CustomSlider = withStyles({
 
 const Sidebar = ({ children }) => {
   const classes = useStyles();
+  const { state } = useContext(TravelContext);
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -171,6 +174,7 @@ const Sidebar = ({ children }) => {
     setValue(newValue);
   };
 
+  console.log(useContext(TravelContext));
   return (
     <div className='sidebar__wrapper'>
       <CssBaseline />
@@ -238,7 +242,7 @@ const Sidebar = ({ children }) => {
                     width: '100px',
                     fontSize: '12px',
                   }}>
-                  Argentina Buenos Aires Argentina Buenos Aires
+                  {/*{state?.saveDestinations?.destinationFromSearch[0]?.nombre || ''}*/}
                 </div>
                 <ControlPointIcon />
               </div>
@@ -268,7 +272,8 @@ const Sidebar = ({ children }) => {
                       width: '80px',
                       fontSize: '12px',
                     }}>
-                    20 oct - 25 oct
+                    {moment(state.saveDestinations?.selectedDateStart).format('DD/MM')} -
+                    {moment(state.saveDestinations?.selectedDateEnd).format('DD/MM')}
                   </div>
                 </div>
               </div>
@@ -286,7 +291,7 @@ const Sidebar = ({ children }) => {
                       width: '60px',
                       fontSize: '12px',
                     }}>
-                    5 dias
+                    {state.saveDestinations?.duracion} dias
                   </div>
                 </div>
               </div>
@@ -341,7 +346,15 @@ const Sidebar = ({ children }) => {
               <SupervisedUserCircleOutlinedIcon />
             </ListItemIcon>
             <ListItemText
-              primary={<div style={{ fontWeight: 'bold', fontSize: '12px' }}>Personas (2)</div>}
+              primary={
+                <div style={{ fontWeight: 'bold', fontSize: '12px' }}>
+                  Personas (
+                  {state.saveDestinations?.niños +
+                    state.saveDestinations?.adultos +
+                    state.saveDestinations?.bebes}
+                  )
+                </div>
+              }
               style={{ fontWeight: 'bold', fontSize: '12px' }}
               className={classes.text1}
             />
@@ -351,7 +364,28 @@ const Sidebar = ({ children }) => {
               <StarsIcon />
             </ListItemIcon>
             <ListItemText
-              primary={<div style={{ fontWeight: 'bold', fontSize: '12px' }}>Servicios (2/3)</div>}
+              primary={
+                <div style={{ fontWeight: 'bold', fontSize: '12px' }}>
+                  Servicios{' '}
+                  {state.saveDestinations?.traslados &&
+                  state.saveDestinations?.shows &&
+                  state.saveDestinations?.excursiones
+                    ? '(3/3)'
+                    : state.saveDestinations?.traslados && state.saveDestinations?.shows
+                    ? '(2/3)'
+                    : state.saveDestinations?.traslados && state.saveDestinations?.excursiones
+                    ? '(2/3)'
+                    : state.saveDestinations?.excursiones && state.saveDestinations?.shows
+                    ? '(2/3)'
+                    : state.saveDestinations?.traslados
+                    ? '(1/3)'
+                    : state.saveDestinations?.shows
+                    ? '(1/3)'
+                    : state.saveDestinations?.excursiones
+                    ? '(1/3)'
+                    : '(0/3)'}
+                </div>
+              }
             />
           </ListItem>
           <ListItem button>
@@ -360,7 +394,16 @@ const Sidebar = ({ children }) => {
             </ListItemIcon>
             <ListItemText
               primary={
-                <div style={{ fontWeight: 'bold', fontSize: '12px' }}>Tipo de servicio (1/3)</div>
+                <div style={{ fontWeight: 'bold', fontSize: '12px' }}>
+                  Tipo de servicio{' '}
+                  {state.saveDestinations?.conGuia
+                    ? '(1/3)'
+                    : state.saveDestinations?.sinGuia
+                    ? '(1/3)'
+                    : state.saveDestinations?.regular
+                    ? '(1/3)'
+                    : '(0/3)'}
+                </div>
               }
             />
           </ListItem>
@@ -373,16 +416,17 @@ const Sidebar = ({ children }) => {
               <StarsIcon />
             </ListItemIcon>
             <ListItemText
-              primary={<div style={{ fontWeight: 'bold', fontSize: '12px' }}>Hospedaje (1/3)</div>}
-            />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <StarsIcon />
-            </ListItemIcon>
-            <ListItemText
               primary={
-                <div style={{ fontWeight: 'bold', fontSize: '12px' }}>Tipo de habitacion (1/3)</div>
+                <div style={{ fontWeight: 'bold', fontSize: '12px' }}>
+                  Hospedaje{' '}
+                  {state.saveDestinations?.estandar
+                    ? '(1/3)'
+                    : state.saveDestinations?.confort
+                    ? '(1/3)'
+                    : state.saveDestinations?.lujo
+                    ? '(1/3)'
+                    : '(0/3)'}
+                </div>
               }
             />
           </ListItem>
@@ -392,7 +436,35 @@ const Sidebar = ({ children }) => {
             </ListItemIcon>
             <ListItemText
               primary={
-                <div style={{ fontWeight: 'bold', fontSize: '12px' }}>Alimentacion (1/3)</div>
+                <div style={{ fontWeight: 'bold', fontSize: '12px' }}>
+                  Tipo de habitacion{' '}
+                  {state.saveDestinations?.single
+                    ? '(1/3)'
+                    : state.saveDestinations?.doble
+                    ? '(1/3)'
+                    : state.saveDestinations?.triple
+                    ? '(1/3)'
+                    : '(0/3)'}
+                </div>
+              }
+            />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <StarsIcon />
+            </ListItemIcon>
+            <ListItemText
+              primary={
+                <div style={{ fontWeight: 'bold', fontSize: '12px' }}>
+                  Alimentacion{' '}
+                  {state.saveDestinations?.soloDesayuno
+                    ? '(1/3)'
+                    : state.saveDestinations?.mediaPension
+                    ? '(1/3)'
+                    : state.saveDestinations?.pensionCompleta
+                    ? '(1/3)'
+                    : '(0/3)'}
+                </div>
               }
             />
           </ListItem>

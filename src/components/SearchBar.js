@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { TextField } from '@material-ui/core';
-import serach_bar from '../style/search_bar.scss';
+// import serach_bar from '../style/search_bar.scss';
 import SearchIcon from '@material-ui/icons/Search';
 import CustomInput from '../components/CustomInput';
-
-import ListItemText from '@material-ui/core/ListItemText';
 
 const SearchBar = ({
   placeholder,
@@ -87,29 +85,29 @@ const SearchBar = ({
                     gap: '10px',
                     justifyContent: 'space-between',
                   }}>
-                  <CustomInput
+                  {value.pais && (<CustomInput
                     disabled={true}
                     id='duracion-input'
-                    label='Duracion'
+                    label='Pais'
                     className='general__input_field'
                     value={value.pais.nombre}
-                  />
+                  />)}
 
-                  <CustomInput
+                  {value.ciudad && (<CustomInput
                     disabled={true}
                     id='duracion-input'
-                    label='Duracion'
+                    label='Ciudad'
                     className='general__input_field'
                     value={value.ciudad.nombre}
-                  />
+                  />)}
 
-                  <CustomInput
+                  {value.region && (<CustomInput
                     disabled={true}
                     id='duracion-input'
-                    label='Duracion'
+                    label='Region'
                     className='general__input_field'
                     value={value.region.nombre}
-                  />
+                  />)}
                 </div>
               );
             }

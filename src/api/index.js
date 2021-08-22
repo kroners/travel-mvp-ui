@@ -15,3 +15,15 @@ export async function getDestinations(destino) {
   }
   return [];
 }
+
+export async function getAllPrograms() {
+  try {
+    const destinationList = await axios.get(`${TRAVEL_BASE_PATH}/programs/`);
+    
+    return destinationList.data;
+
+  } catch (error) {
+    console.log(error);  
+  }
+  return [];
+};

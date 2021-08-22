@@ -18,10 +18,6 @@ const Home = () => {
   const [step, setStep] = useState(0);
   const stepsInfo = ['Informacion principal', 'Servicios', 'Hospedaje', 'Datos adicionales'];
 
-  const test = () => {
-    console.log('object');
-  };
-
   // Proceed to next step
   const handleNextSelect = () => {
     let nextStep = step + 1;
@@ -77,6 +73,7 @@ const Home = () => {
       break;
     default:
       console.log('This is a multi-step form built with React.');
+      // change default to mainInfo or create a callback to ErrorPAge - InfoPage
   }
   return (
     <div className='home'>

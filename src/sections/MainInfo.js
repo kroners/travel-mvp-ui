@@ -17,14 +17,17 @@ import { SAVE_DESTINATIONS } from '../context/types';
 require('../style/main_info.scss');
 
 function MainInfo({ values, handleNextSelect }) {
+  // Group useContext together
+  // deberian estar en el mismo destructure?
   const { dispatch, state } = useContext(TravelContext);
-  //  const [destinationList, setDestinationList] = useState([{ destination: '' }]);
+  const { destinations, getDestinations } = useContext(TravelContext);
+
   const [budgetValue, setBudgetValue] = useState([150, 2000]);
   const [selectedDateStart, setSelectedDateStart] = useState(new Date());
   const [selectedDateEnd, setSelectedDateEnd] = useState(new Date());
   const [wordEntered, setWordEntered] = useState('');
+  // donde se aplicaria el loading
   const [loading, setLoading] = useState(false);
-  const { destinations, getDestinations } = useContext(TravelContext);
   const [destinationList, setDestinationList] = useState(destinations);
 
   const [destinationFromSearch, setdestinationFromSearch] = useState([]);
@@ -72,6 +75,8 @@ function MainInfo({ values, handleNextSelect }) {
       },
     });
   }, [
+    // me gustaria entender mas de como se aplica este useEffect
+    // estaria haciendo un trigger por cada cambio que se haya realizado en algun cambio de estas variables?
     wordEntered,
     selectedDateStart,
     selectedDateEnd,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { TextField } from '@material-ui/core';
 // import serach_bar from '../style/search_bar.scss';
@@ -28,17 +28,19 @@ const SearchBar = ({
     } else {
       setFilteredData(newFilter);
       setSummary(newFilter);
-      setdestinationFromSearch(newFilter);
     }
   };
 
   const fillInput = (value) => {
-    getWordEntered(value);
+    getWordEntered(value.nombre);
     setShowReview(true);
+    //const x = summary.filter((item) => item.nombre === value.nombre);
+    setdestinationFromSearch([value.nombre]);
+    console.log(value, 'summary');
 
     setFilteredData([]);
   };
-  console.log(filteredData, 'filteredData');
+
   return (
     <div className='search'>
       <div className='searchInputs'>
@@ -61,11 +63,7 @@ const SearchBar = ({
         <div className='dataResult'>
           {filteredData.map((value, i) => {
             return (
-              <div
-                onClick={() => fillInput(value.nombre)}
-                key={i}
-                id='clearBtn'
-                className='dataItem'>
+              <div onClick={() => fillInput(value)} key={i} id='clearBtn' className='dataItem'>
                 <p>{value.nombre}</p>
               </div>
             );
@@ -85,29 +83,35 @@ const SearchBar = ({
                     gap: '10px',
                     justifyContent: 'space-between',
                   }}>
-                  {value.pais && (<CustomInput
-                    disabled={true}
-                    id='duracion-input'
-                    label='Pais'
-                    className='general__input_field'
-                    value={value.pais.nombre}
-                  />)}
+                  {value.pais && (
+                    <CustomInput
+                      disabled={true}
+                      id='duracion-input'
+                      label='Pais'
+                      className='general__input_field'
+                      value={value.pais.nombre}
+                    />
+                  )}
 
-                  {value.ciudad && (<CustomInput
-                    disabled={true}
-                    id='duracion-input'
-                    label='Ciudad'
-                    className='general__input_field'
-                    value={value.ciudad.nombre}
-                  />)}
+                  {value.ciudad && (
+                    <CustomInput
+                      disabled={true}
+                      id='duracion-input'
+                      label='Ciudad'
+                      className='general__input_field'
+                      value={value.ciudad.nombre}
+                    />
+                  )}
 
-                  {value.region && (<CustomInput
-                    disabled={true}
-                    id='duracion-input'
-                    label='Region'
-                    className='general__input_field'
-                    value={value.region.nombre}
-                  />)}
+                  {value.region && (
+                    <CustomInput
+                      disabled={true}
+                      id='duracion-input'
+                      label='Region'
+                      className='general__input_field'
+                      value={value.region.nombre}
+                    />
+                  )}
                 </div>
               );
             }

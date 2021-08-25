@@ -175,6 +175,7 @@ const Sidebar = ({ children }) => {
   };
 
   console.log(useContext(TravelContext));
+  console.log(JSON.stringify(state.saveDestinations));
   return (
     <div className='sidebar__wrapper'>
       <CssBaseline />
@@ -242,7 +243,7 @@ const Sidebar = ({ children }) => {
                     width: '100px',
                     fontSize: '12px',
                   }}>
-                  {/*{state?.saveDestinations?.destinationFromSearch[0]?.nombre || ''}*/}
+                  {state?.saveDestinations?.destinationFromSearch[0] || ''}
                 </div>
                 <ControlPointIcon />
               </div>

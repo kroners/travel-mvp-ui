@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { Checkbox, TextField } from '@material-ui/core';
 import { useFilters } from '../hooks';
+import { Select, MenuItem, FormControl, InputLabel, makeStyles } from '@material-ui/core';
+import TravelContext from '../context/Travel/TravelContext';
+import { SET_LANGUAGE } from '../context/types';
 
 require('../style/additional_info.scss');
 
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    minWidth: 100,
+  },
+}));
+
 function AdditionalInfo() {
+  const { state, dispatch, sendDestinations, postResponse } = useContext(TravelContext);
+  const [postRes, setPostRes] = useState(postResponse);
   const {
     filters: { tripProfiles, activities },
   } = useFilters();
@@ -53,6 +64,28 @@ function AdditionalInfo() {
     },
   ];
   newActivities = [...newActivities, ...activities];
+
+  const [idioma, setIdioma] = useState('');
+
+  const classes = useStyles();
+  const handleIdioma = (e) => {
+    dispatch({
+      type: SET_LANGUAGE,
+      payload: e.target.value,
+    });
+  };
+
+  useEffect(() => {
+    const sendDest = async () => {
+      const res = await sendDestinations();
+
+      if (res.data) {
+        setPostRes(res.data);
+      }
+    };
+    sendDest();
+  }, []);
+  console.log(postRes, 'respuesta backend');
 
   return (
     <div className='additional_info'>
@@ -102,7 +135,14 @@ function AdditionalInfo() {
             </div>
             <div className='additional_info__idioma'>
               <h3>Idioma</h3>
-              <TextField id='pais-input' label='Pais' />
+              <FormControl className={classes.formControl}>
+                <InputLabel>Seleccione</InputLabel>
+                <Select onChange={handleIdioma}>
+                  <MenuItem value='Ingles'>Ingles</MenuItem>
+                  <MenuItem value='Español'>Español</MenuItem>
+                  <MenuItem value='Portugues'>Portuges</MenuItem>
+                </Select>
+              </FormControl>
             </div>
           </div>
         </Grid>

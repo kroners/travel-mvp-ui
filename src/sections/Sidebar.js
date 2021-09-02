@@ -175,7 +175,7 @@ const Sidebar = ({ children }) => {
   };
 
   console.log(useContext(TravelContext));
-  console.log(JSON.stringify(state.saveDestinations));
+  console.log(state.idioma, 'idioma');
   return (
     <div className='sidebar__wrapper'>
       <CssBaseline />
@@ -498,7 +498,9 @@ const Sidebar = ({ children }) => {
               <StarsIcon />
             </ListItemIcon>
             <ListItemText
-              primary={<div style={{ fontWeight: 'bold', fontSize: '12px' }}>Idioma Español</div>}
+              primary={
+                <div style={{ fontWeight: 'bold', fontSize: '12px' }}>Idioma {state.idioma}</div>
+              }
             />
           </ListItem>
         </List>

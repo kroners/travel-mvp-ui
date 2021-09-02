@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { TextField } from '@material-ui/core';
-// import serach_bar from '../style/search_bar.scss';
+//import search_bar from '../style/search_bar.scss';
 import SearchIcon from '@material-ui/icons/Search';
 import CustomInput from '../components/CustomInput';
 
@@ -15,6 +15,7 @@ const SearchBar = ({
   const [filteredData, setFilteredData] = useState([]);
   const [showReview, setShowReview] = useState(false);
   const [summary, setSummary] = useState([]);
+  const [newArray, setNewArray] = useState([]);
 
   const handleFilter = (event) => {
     const searchWord = event.target.value;
@@ -34,16 +35,30 @@ const SearchBar = ({
   const fillInput = (value) => {
     getWordEntered(value.nombre);
     setShowReview(true);
-    //const x = summary.filter((item) => item.nombre === value.nombre);
-    setdestinationFromSearch([value.nombre]);
-    console.log(value, 'summary');
+
+    setNewArray([...newArray, value]);
 
     setFilteredData([]);
   };
 
+  useEffect(
+    (value) => {
+      setdestinationFromSearch(newArray.map((x) => x.nombre));
+    },
+    [newArray],
+  );
+
+  console.log(newArray, 'newArray');
+
   return (
     <div className='search'>
-      <div className='searchInputs'>
+      <div
+        className='searchInputs'
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'flex-start',
+        }}>
         <TextField
           label={placeholder}
           type='search'
@@ -60,7 +75,13 @@ const SearchBar = ({
         />
       </div>
       {filteredData.length != 0 && (
-        <div className='dataResult'>
+        <div
+          className='dataResult'
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+          }}>
           {filteredData.map((value, i) => {
             return (
               <div onClick={() => fillInput(value)} key={i} id='clearBtn' className='dataItem'>
@@ -72,49 +93,49 @@ const SearchBar = ({
       )}
       {showReview !== false && (
         <div className='accordion' style={{ marginTop: '2vh', width: '100%' }}>
-          {summary.map((value, i) => {
-            if (value.nombre === wordEntered) {
-              return (
-                <div
-                  key={i}
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr 1fr',
-                    gap: '10px',
-                    justifyContent: 'space-between',
-                  }}>
-                  {value.pais && (
-                    <CustomInput
-                      disabled={true}
-                      id='duracion-input'
-                      label='Pais'
-                      className='general__input_field'
-                      value={value.pais.nombre}
-                    />
-                  )}
+          {newArray.map((value, i) => {
+            //if (value.nombre === wordEntered) {
+            return (
+              <div
+                key={i}
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '1fr 1fr 1fr',
+                  gap: '10px',
+                  justifyContent: 'space-between',
+                }}>
+                {value.pais && (
+                  <CustomInput
+                    disabled={true}
+                    id='duracion-input'
+                    label='Pais'
+                    className='general__input_field'
+                    value={value.pais.nombre}
+                  />
+                )}
 
-                  {value.ciudad && (
-                    <CustomInput
-                      disabled={true}
-                      id='duracion-input'
-                      label='Ciudad'
-                      className='general__input_field'
-                      value={value.ciudad.nombre}
-                    />
-                  )}
+                {value.ciudad && (
+                  <CustomInput
+                    disabled={true}
+                    id='duracion-input'
+                    label='Ciudad'
+                    className='general__input_field'
+                    value={value.ciudad.nombre}
+                  />
+                )}
 
-                  {value.region && (
-                    <CustomInput
-                      disabled={true}
-                      id='duracion-input'
-                      label='Region'
-                      className='general__input_field'
-                      value={value.region.nombre}
-                    />
-                  )}
-                </div>
-              );
-            }
+                {value.region && (
+                  <CustomInput
+                    disabled={true}
+                    id='duracion-input'
+                    label='Region'
+                    className='general__input_field'
+                    value={value.region.nombre}
+                  />
+                )}
+              </div>
+            );
+            //}
           })}
         </div>
       )}

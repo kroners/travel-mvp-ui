@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import MainInfo from '../sections/MainInfo';
 import { Services } from '../sections/Services';
 import Accommodation from '../sections/Accommodation';
@@ -9,14 +9,13 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
-import TravelContext from '../context/Travel/TravelContext';
+
 require('../style/home.scss');
 
 const Home = () => {
   let innerSectionForm;
   let history = useHistory();
-  const { state } = useContext(TravelContext);
+
   const [step, setStep] = useState(0);
   const stepsInfo = ['Informacion principal', 'Servicios', 'Hospedaje', 'Datos adicionales'];
 
@@ -34,12 +33,7 @@ const Home = () => {
   }
 
   // Handle fields change
-  const handleSubmit = async (input) => {
-    const res = await axios.post(
-      'http://127.0.0.1:8000/api/v1/prueba_POST/',
-      state.saveDestinations,
-    );
-    console.log(res, 'respuesta');
+  const handleSubmit = () => {
     history.push('/programs');
 
     //  alert(JSON.stringify(state.saveDestinations));

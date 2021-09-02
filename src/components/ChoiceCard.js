@@ -1,7 +1,11 @@
+import React, { useState, useContext } from 'react';
 import { Button, Grid } from '@material-ui/core';
+import TravelContext from '../context/Travel/TravelContext';
 
 const ChoiceCard = ({ data }) => {
   console.log({ data });
+  const { state, dispatch, sendDestinations } = useContext(TravelContext);
+  console.log(state.postResponse, 'post response');
 
   return (
     <div className='program_search__choice_card'>

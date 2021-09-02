@@ -31,6 +31,7 @@ function MainInfo({ values, handleNextSelect }) {
   const [destinationList, setDestinationList] = useState(destinations);
 
   const [destinationFromSearch, setdestinationFromSearch] = useState([]);
+  console.log(destinationFromSearch, 'data');
 
   useEffect(() => {
     setLoading(true);

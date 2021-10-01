@@ -1,0 +1,29 @@
+@import './variables';
+
+.contact-agent {
+	color: $font-light;
+
+	&__banner {
+		display: flex;
+		height: 400px;
+		background: url('../assets/show2.jpg');
+		text-align: center;
+	}
+
+	&__form {
+		display: flex;
+		flex-direction: column;
+
+		&-item {
+			display: flex;
+			position: relative;
+		}
+	}
+}
+@media all and (max-width: 700px) {
+	.main_info {
+		&__move_buttons {
+			background-color: red;
+		}
+	}
+}

@@ -1,53 +1,105 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Button, Step, StepLabel, Stepper } from '@material-ui/core';
+import BasicInfo from '../sections/admin/BasicInfo';
+import ServicesHousing from '../sections/admin/ServicesHousing';
+import PackageDetails from '../sections/admin/PackageDetails';
+import Itinerary from '../sections/admin/Itinerary';
+import Price from '../sections/admin/Price';
+import Extras from '../sections/admin/Extras';
 
-const AdminCreateProgram = (props) => {
-  let innerSectionForm;
-  let history = useHistory();
+const AdminCreateProgram = () => {
+	let innerSectionForm;
+	const history = useHistory();
 
-  const [step, setStep] = useState(0);
-  const stepsInfo = ['Informacion principal', 'Servicios', 'Hospedaje', 'Datos adicionales'];
+	const [step, setStep] = useState(0);
+	const stepsInfo = [
+		'Datos básicos',
+		'Servicios y Alojamiento',
+		'Detalles del paquete',
+		'Itineriario',
+		'Precio',
+		'Datos adicionales',
+	];
 
-  const test = () => {
-    console.log('object');
-  };
+	const test = () => {
+		console.log('object');
+	};
 
-  // Proceed to next step
-  const handleNextSelect = () => {
-    let nextStep = step + 1;
-    setStep(nextStep);
-    test();
-  };
+	// Proceed to next step
+	const handleNextSelect = () => {
+		const nextStep = step + 1;
+		setStep(nextStep);
+		test();
+	};
 
-  // Go back to prev step
-  function handlePrevSelect() {
-    let prevStep = step - 1;
-    setStep(prevStep);
-  }
+	// Go back to prev step
+	function handlePrevSelect() {
+		const prevStep = step - 1;
+		setStep(prevStep);
+	}
 
-  // Handle fields change
-  const handleSubmit = (input) => {
-    history.push('/programs');
-    //  alert(JSON.stringify(state.saveDestinations));
-  };
+	// Handle fields change
+	const handleSubmit = () => {
+		history.push('/programs');
+	};
 
-  return (
-    <div className='home'>
-      <div className='home__header-carousel'>
-        <div className='home__header-title'>
-          <h1>SHOW EN LA HABANA</h1>
-        </div>
-        <div className='home__header-detail'>
-          <p>A donde quieres ir?</p>
-        </div>
-      </div>
-    </div>
-  );
-}
+	switch (step) {
+		case 0:
+			innerSectionForm = <BasicInfo />;
+			break;
+		case 1:
+			innerSectionForm = <ServicesHousing />;
+			break;
+		case 2:
+			innerSectionForm = <PackageDetails />;
+			break;
+		case 3:
+			innerSectionForm = <Itinerary />;
+			break;
+		case 4:
+			innerSectionForm = <Price />;
+			break;
+		case 5:
+			innerSectionForm = <Extras />;
+			break;
+		default:
+			console.log('This is a multi-step form built with React.');
+		// change default to mainInfo or create a callback to ErrorPAge - InfoPage
+	}
 
-AdminCreateProgram.propTypes = {
-  props: PropTypes
-}
+	return (
+		<div className="admin-home">
+			<div className="admin-home__header">Vista de administrador</div>
+			<div className="admin-home__stepper">
+				<Stepper activeStep={step}>
+					{stepsInfo.map((label) => (
+						<Step key={label}>
+							<StepLabel>{label}</StepLabel>
+						</Step>
+					))}
+				</Stepper>
+			</div>
+			<div className="admin-home__body">{innerSectionForm}</div>
+			<div className="home__move_buttons">
+				<Button variant="outlined" onClick={() => handlePrevSelect()}>
+					Atras
+				</Button>
+				{step !== 3 && (
+					<Button variant="outlined" onClick={() => handleNextSelect()}>
+						Siguiente
+					</Button>
+				)}
+				{step === 3 && (
+					<Button variant="outlined" onClick={() => handleSubmit()}>
+						Crear paquete
+					</Button>
+				)}
+			</div>
+		</div>
+	);
+};
+
+AdminCreateProgram.propTypes = {};
 
 export default AdminCreateProgram;

@@ -1,0 +1,79 @@
+{
+  "extends": [
+    "airbnb",
+    "prettier"
+  ],
+  "parser": "babel-eslint",
+  "plugins": [
+    "import",
+    "jsx-a11y",
+    "react"
+  ],
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "node": true,
+    "es6": true,
+  },
+  "rules": {
+    "eqeqeq": "error",
+    "func-names":"off",
+    "no-console":"warn",
+    "no-negated-condition":"warn",
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "never"
+      }
+    ],
+    "no-unused-vars":"warn",
+    "no-use-before-define":"off",
+    "no-param-reassign":"off",
+    "prefer-promise-reject-errors":"off",
+    "class-methods-use-this":"off",
+    "no-plusplus":"off",
+    "no-restricted-globals": "off",
+    "import/no-cycle": "off",
+    "import/no-named-as-default": "off",
+    "import/prefer-default-export": "off",
+    "react/jsx-no-target-blank": "off",
+    "react/no-deprecated": "off",
+    "react/no-string-refs": "warn",
+    "react/no-target-blank": "off",
+    "react/button-has-type": [
+      "error",
+      {
+        "button": true,
+        "submit": true,
+        "reset": true
+      }
+    ],
+    "react/destructuring-assignment": "off",
+    "react/forbid-prop-types": "off",
+    "react/prop-types": "warn",
+    "react/jsx-filename-extension": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-wrap-multilines": [
+      "error",
+      {
+        "declaration": false,
+        "assignment": false
+      }
+    ],
+    "react/no-array-index-key": "off",
+    "react/prefer-stateless-function": "off",
+    "react/require-default-props": "off",
+    "react/jsx-props-no-spreading": "warn",
+    "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "jsx-a11y/label-has-for": "off",
+    "jsx-a11y/mouse-events-have-key-events": "off",
+    "jsx-a11y/no-noninteractive-tabindex": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+  },
+}

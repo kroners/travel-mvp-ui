@@ -1,107 +1,107 @@
 @import './variables';
 
 .main_info {
-  background-color: $wizard-color;
-  max-width: 1040px;
-  height: 100%;
-  text-align: center;
-  margin: 0 auto;
-  padding: 10px;
-  color: $text-1;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
-  > div {
-    height: 100%;
-  }
+	background-color: $wizard-color;
+	max-width: 1040px;
+	height: 100%;
+	text-align: center;
+	margin: 0 auto;
+	padding: 10px;
+	color: $text-1;
+	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+	> div {
+		height: 100%;
+	}
 
-  &__wrapper {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+	&__wrapper {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
 
-  &__destino {
-    margin: 10px 0;
+	&__destino {
+		margin: 10px 0;
 
-    &_header {
-      display: flex;
-      height: auto;
-    }
+		&_header {
+			display: flex;
+			height: auto;
+		}
 
-    &_body {
-      display: flex;
-      height: 200px;
-      > div:not(:last-child) {
-        margin-right: 10px;
-      }
-    }
+		&_body {
+			display: flex;
+			height: 200px;
+			> div:not(:last-child) {
+				margin-right: 10px;
+			}
+		}
 
-    &_body {
-      flex-direction: column;
+		&_body {
+			flex-direction: column;
 
-      &_element {
-        display: flex;
-        align-items: center;
+			&_element {
+				display: flex;
+				align-items: center;
 
-        &:not(:last-child) {
-          margin-bottom: 10px;
-        }
-      }
-    }
-  }
-  &__fecha {
-    display: flex;
-  }
+				&:not(:last-child) {
+					margin-bottom: 10px;
+				}
+			}
+		}
+	}
+	&__fecha {
+		display: flex;
+	}
 
-  &__side_text {
-    background-image: url('../assets/aviones.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    height: 100%;
-    width: 100%;
-    border-radius: 5px;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-  }
+	&__side_text {
+		background-image: url('../assets/aviones.jpg');
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center center;
+		height: 100%;
+		width: 100%;
+		border-radius: 5px;
+		box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+	}
 
-  &__presupuesto,
-  &__fecha {
-    text-align: left;
-  }
+	&__presupuesto,
+	&__fecha {
+		text-align: left;
+	}
 
-  .fill_circle_primary {
-    fill: $primary-color;
-    margin-left: 10px;
-  }
+	.fill_circle_primary {
+		fill: $primary-color;
+		margin-left: 10px;
+	}
 
-  &__presupuesto {
-    & .MuiSlider-root {
-      margin-top: 20px;
-    }
-  }
+	&__presupuesto {
+		& .MuiSlider-root {
+			margin-top: 20px;
+		}
+	}
 }
 
 @media all and (max-width: 700px) {
-  .main_info {
-    &__content {
-      display: flex;
-      flex-direction: column;
+	.main_info {
+		&__content {
+			display: flex;
+			flex-direction: column;
 
-      > div {
-        width: 100%;
-        max-width: none;
-        flex-basis: auto;
-      }
-    }
-    &__side_content {
-      width: 100%;
+			> div {
+				width: 100%;
+				max-width: none;
+				flex-basis: auto;
+			}
+		}
+		&__side_content {
+			width: 100%;
 
-      > div {
-        width: 100%;
-      }
-    }
-    &__side_image {
-      display: none;
-    }
-  }
+			> div {
+				width: 100%;
+			}
+		}
+		&__side_image {
+			display: none;
+		}
+	}
 }

@@ -1,52 +1,51 @@
-@import "./variables";
+@import './variables';
 
 .additional_info {
-    background-color: $wizard-color;
-    max-width: 1040px;
-    max-height: 600px;
-    text-align: left;
-    margin: 0 auto;
-    padding: 10px;
-    color: $text-1;
+	background-color: $wizard-color;
+	max-width: 1040px;
+	max-height: 600px;
+	text-align: left;
+	margin: 0 auto;
+	padding: 10px;
+	color: $text-1;
 
-    &__actividades_header,
-    &__perfil_viaje_header,
-    &__actividades_wrapper,
-    &__perfiles_wrapper {
-        display: flex;
-        align-content: center;
-        vertical-align: middle;
-    }
+	&__actividades_header,
+	&__perfil_viaje_header,
+	&__actividades_wrapper,
+	&__perfiles_wrapper {
+		display: flex;
+		align-content: center;
+		vertical-align: middle;
+	}
 
-    &__actividades_wrapper {
-        overflow: auto;
-        height: 140px;
-        align-content: flex-start;
-        -webkit-flex-flow: row wrap;
-        flex-flow: row wrap;
-    }
+	&__actividades_wrapper {
+		overflow: auto;
+		height: 140px;
+		align-content: flex-start;
+		-webkit-flex-flow: row wrap;
+		flex-flow: row wrap;
+	}
 
-    &__actividad,
-    &__perfil_viaje {
-        background-color: $empty-space-gray;
-        height: 100px;
-        width: 160px;
-        margin-right: 0;
+	&__actividad,
+	&__perfil_viaje {
+		background-color: $empty-space-gray;
+		height: 100px;
+		width: 160px;
+		margin-right: 0;
 
-        &:not(:last-child) {
-            margin-right: 10px;
-        }
-    }
+		&:not(:last-child) {
+			margin-right: 10px;
+		}
+	}
 
+	&__actividad {
+		min-width: 160px;
+		margin-bottom: 10px;
+	}
 
-    &__actividad {
-        min-width: 160px;
-        margin-bottom: 10px;
-    }
-
-    &__side_text {
-        background-color: $empty-space-gray;
-        height: 100%;
-        width: 100%;
-    }
+	&__side_text {
+		background-color: $empty-space-gray;
+		height: 100%;
+		width: 100%;
+	}
 }

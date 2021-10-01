@@ -1,44 +1,46 @@
-@import "./style/variables.scss";
+@import './style/variables.scss';
 
 header {
-    background-color: $primary-color;
-    & .navbar {
-        margin: 0 8%;
-    }
+	background-color: $primary-color;
+	& .navbar {
+		margin: 0 8%;
+	}
 }
 
 footer {
-    background-color: $footer-color;
-    margin-top: 40px;
-    & .footer__body {
-        color: $font-light;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 40px;
-    }
+	background-color: $footer-color;
+	margin-top: 40px;
+	& .footer__body {
+		color: $font-light;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 40px;
+	}
 }
 
 .home,
-.program_search, 
-.program_detail {
-    flex: 1;
+.program_search,
+.program_detail,
+.contact-agent {
+	flex: 1;
 }
 
-.navbar, .footer__body {
-    display: flex;
-    flex-direction: row;
+.navbar,
+.footer__body {
+	display: flex;
+	flex-direction: row;
 }
 
 .general__input_field {
-    div {
-        color: $primary-color;
-        border-color: $primary-color;
-    }
-    & .MuiOutlinedInput-input {
-        padding: 10px 7px;
-    }
-    > label {
-        transform: translate(10px, 60%);
-    }
+	div {
+		color: $primary-color;
+		border-color: $primary-color;
+	}
+	& .MuiOutlinedInput-input {
+		padding: 10px 7px;
+	}
+	> label {
+		transform: translate(10px, 60%);
+	}
 }

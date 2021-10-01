@@ -5,50 +5,50 @@ import { TRAVEL_API } from '../api';
 import { filterOptions } from '../helpers';
 
 export const useProjects = () => {
-  const [projects, setProjects] = useState([]);
-  console.log({ hooksProjects: projects });
+	const [projects, setProjects] = useState([]);
+	console.log({ hooksProjects: projects });
 
-  // useEffect(() => {
-  //   let promesaResuelta = Promise.resolve(true)
-  //   promesaResuelta
-  //     .then((snapshot) => {
-  //       console.log({ snapshot })
-  //       // const allProjects = snapshot.docs.map((project) => ({
-  //       //   ...project.data(),
-  //       //   docId: project.id,
-  //       // }))
+	// useEffect(() => {
+	//   let promesaResuelta = Promise.resolve(true)
+	//   promesaResuelta
+	//     .then((snapshot) => {
+	//       console.log({ snapshot })
+	//       // const allProjects = snapshot.docs.map((project) => ({
+	//       //   ...project.data(),
+	//       //   docId: project.id,
+	//       // }))
 
-  //       // if (JSON.stringify(allProjects) !== JSON.stringify(projects)) {
-  //       //   setProjects(allProjects)
-  //       // }
-  //     })
-  // }, [projects])
+	//       // if (JSON.stringify(allProjects) !== JSON.stringify(projects)) {
+	//       //   setProjects(allProjects)
+	//       // }
+	//     })
+	// }, [projects])
 
-  return { projects, setProjects };
+	return { projects, setProjects };
 };
 
 export const useFilters = () => {
-  const [filters, setFilters] = useState(filterOptions);
-  console.log({ filters });
+	const [filters, setFilters] = useState(filterOptions);
+	console.log({ filters });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios(`${TRAVEL_API}/activities`);
-      console.log({ result });
-      setFilters(result.data);
-    };
+	useEffect(() => {
+		const fetchData = async () => {
+			const result = await axios(`${TRAVEL_API}/activities`);
+			console.log({ result });
+			setFilters(result.data);
+		};
 
-    fetchData();
-  }, [filters]);
+		fetchData();
+	}, [filters]);
 
-  return { filters, setFilters };
+	return { filters, setFilters };
 };
 
 export const useConfig = () => {
-  const initialConfig = {
-    selectedPage: 'packages',
-  };
-  const [config, setConfig] = useState(initialConfig);
+	const initialConfig = {
+		selectedPage: 'packages',
+	};
+	const [config, setConfig] = useState(initialConfig);
 
-  return { config, setConfig };
+	return { config, setConfig };
 };

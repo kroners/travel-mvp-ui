@@ -1,40 +1,37 @@
-@import "./variables";
+@import './variables';
 
 .navbar {
-    display: flex;
-    margin: 0px 8%;
-    color: $font-light;
-    height: 100%;
-    justify-content: space-between;
-    align-items: center;
+	display: flex;
+	margin: 0px 8%;
+	color: $font-light;
+	height: 100%;
+	justify-content: space-between;
+	align-items: center;
 
-    &__options,
-    &__user-options {
-        display: flex;
-    }
+	&__options,
+	&__user-options {
+		display: flex;
+	}
 
-    &__options {
-        & .navbar__paquetes, 
-        & .navbar__contacta-asesor {
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-        button {
-            background-color: $secondary-color;
-            width: 145px;
-            height: 30px;
-            color: $font-light;
-            border: none;
+	&__options {
+		button {
+			cursor: pointer;
+			padding: 5px 10px;
+			background-color: $secondary-color;
+			width: 145px;
+			height: 30px;
+			color: $font-light;
+			border: none;
 
-            &:first-child {
-                margin-right: 10px;
-            }
-        }
-    }
+			&:first-child {
+				margin-right: 10px;
+			}
+		}
+	}
 
-    &__logo--inner {
-        img {
-            max-height: 75px;    
-        }
-    }
+	&__logo--inner {
+		img {
+			max-height: 75px;
+		}
+	}
 }

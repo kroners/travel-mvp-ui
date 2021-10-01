@@ -1,39 +1,39 @@
-@import "./variables";
+@import './variables';
 
 .accommodation {
-    background-color: $wizard-color;
-    max-width: 1040px;
-    max-height: 600px;
-    text-align: left;
-    margin: 0 auto;
-    padding: 10px;
-    color: $text-1;
+	background-color: $wizard-color;
+	max-width: 1040px;
+	max-height: 600px;
+	text-align: left;
+	margin: 0 auto;
+	padding: 10px;
+	color: $text-1;
 
-    &__tipo_hospedaje_wrapper,
-    &__alimentacion_wrapper,
-    &__tipo_habitacion_wrapper,
-    &__opcion_hospedaje,
-    &__opcion_habitacion,
-    &__opcion_alimentacion {
-        display: flex;
-    }
+	&__tipo_hospedaje_wrapper,
+	&__alimentacion_wrapper,
+	&__tipo_habitacion_wrapper,
+	&__opcion_hospedaje,
+	&__opcion_habitacion,
+	&__opcion_alimentacion {
+		display: flex;
+	}
 
-    &__opcion_hospedaje,
-    &__opcion_habitacion,
-    &__opcion_alimentacion {
-        background-color: $empty-space-gray;
-        height: 100px;
-        width: 160px;
-        margin-right: 0;
+	&__opcion_hospedaje,
+	&__opcion_habitacion,
+	&__opcion_alimentacion {
+		background-color: $empty-space-gray;
+		height: 100px;
+		width: 160px;
+		margin-right: 0;
 
-        &:not(:last-child) {
-            margin-right: 10px;
-        }
-    }
+		&:not(:last-child) {
+			margin-right: 10px;
+		}
+	}
 
-    &__side_text {
-        background-color: $empty-space-gray;
-        height: 100%;
-        width: 100%;
-    }
+	&__side_text {
+		background-color: $empty-space-gray;
+		height: 100%;
+		width: 100%;
+	}
 }

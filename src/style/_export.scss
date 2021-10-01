@@ -1,12 +1,12 @@
-@import "./variables";
+@import './variables';
 
 $theme-colors: (
-    'primaryColor': $primary-color,
-    'secondaryColor': $secondary-color,
+	'primaryColor': $primary-color,
+	'secondaryColor': $secondary-color,
 );
 
 :export {
-    @each $key, $value in $theme-colors {
-      #{unquote($key)}: $value;
-    }
-  }
+	@each $key, $value in $theme-colors {
+		#{unquote($key)}: $value;
+	}
+}

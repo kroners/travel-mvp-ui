@@ -1,49 +1,49 @@
 @import './variables';
 
 .home {
-  color: $font-light;
+	color: $font-light;
 
-  &__header-carousel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 400px;
-    background: url('../assets/show2.jpg');
-  }
-  &__header-title {
-    margin-top: auto;
-  }
+	&__header-carousel {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		height: 400px;
+		background: url('../assets/show2.jpg');
+	}
+	&__header-title {
+		margin-top: auto;
+	}
 
-  &__stepper {
-    width: 100%;
-    max-width: 700px;
-    align-items: center;
-    text-align: center;
-    margin: 0 auto;
+	&__stepper {
+		width: 100%;
+		max-width: 700px;
+		align-items: center;
+		text-align: center;
+		margin: 0 auto;
 
-    &--mobile {
-      display: none;
-    }
-  }
+		&--mobile {
+			display: none;
+		}
+	}
 
-  &__move_buttons {
-    margin-top: 20px;
-    & button {
-      background-color: $secondary-color;
-      width: 250px;
-      color: $font-light;
-      border: none;
-      margin-top: 20px;
-      &:first-child {
-        margin-right: 10px;
-      }
-    }
-  }
+	&__move_buttons {
+		margin-top: 20px;
+		& button {
+			background-color: $secondary-color;
+			width: 250px;
+			color: $font-light;
+			border: none;
+			margin-top: 20px;
+			&:first-child {
+				margin-right: 10px;
+			}
+		}
+	}
 }
 @media all and (max-width: 700px) {
-  .main_info {
-    &__move_buttons {
-      background-color: red;
-    }
-  }
+	.main_info {
+		&__move_buttons {
+			background-color: red;
+		}
+	}
 }

@@ -5,14 +5,13 @@ import Home from './pages/Home';
 import ProgramSearch from './pages/ProgramSearch';
 import ProgramDetail from './pages/ProgramDetail';
 import ContactAgent from './pages/ContactAgent';
+import AdminHome from './pages/AdminHome';
+
 import Header from './components/Header';
 import Footer from './components/Footer';
-// import { ProjectProvider } from './context';
 import TravelState from './context/Travel/TravelState';
+import ProgramState from './context/Programs/ProgramState';
 import './App.scss';
-import variables from './style/variables.scss';
-
-console.log({ variables });
 
 const theme = createMuiTheme({
 	palette: {
@@ -30,14 +29,21 @@ const App = () => (
 	<ThemeProvider theme={theme}>
 		<BrowserRouter>
 			<TravelState>
-				<Header />
-				<Switch>
-					<Route path="/programs" exact component={ProgramSearch} />
-					<Route path="/programs/:programsId" exact component={ProgramDetail} />
-					<Route path="/contact-agent" exact component={ContactAgent} />
-					<Route path="/" exact component={Home} />
-				</Switch>
-				<Footer />
+				<ProgramState>
+					<Header />
+					<Switch>
+						<Route path="/programs" exact component={ProgramSearch} />
+						<Route
+							path="/programs/:programsId"
+							exact
+							component={ProgramDetail}
+						/>
+						<Route path="/contact-agent" exact component={ContactAgent} />
+						<Route path="/" exact component={Home} />
+						<Route path="/admin/home" exact component={AdminHome} />
+					</Switch>
+					<Footer />
+				</ProgramState>
 			</TravelState>
 		</BrowserRouter>
 	</ThemeProvider>

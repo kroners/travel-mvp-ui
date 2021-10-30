@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Step, StepLabel, Stepper } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -8,6 +8,10 @@ import MainInfo from '../sections/MainInfo';
 import { Services } from '../sections/Services';
 import Accommodation from '../sections/Accommodation';
 import AdditionalInfo from '../sections/AdditionalInfo';
+import TravelContext from '../context/Travel/TravelContext';
+import { getFilters } from '../selectors/filters';
+import { getPrograms } from '../api';
+import ProgramContext from '../context/Programs/ProgramContext';
 
 require('../style/home.scss');
 
@@ -35,13 +39,23 @@ const Home = () => {
 		setStep(prevStep);
 	}
 
-	// Handle fields change
-	const handleSubmit = () => {
-		// query
-		// json post
-		history.push('/programs');
+	// Handle Submit to get programs from filters
+	const handleSubmit = async () => {
+		const [state] = useContext(TravelContext);
+		const [, dispatch] = useContext(ProgramContext);
+		const filtros = getFilters(state);
 
-		//  alert(JSON.stringify(state.saveDestinations));
+		const response = await getPrograms(filtros);
+		if (response) {
+			dispatch({
+				type: 'SAVE_PROGRAMS',
+				payload: {
+					programa_principal: response.main_program,
+					programas_extras: response.other_programs,
+				},
+			});
+			history.push('/programs');
+		}
 	};
 
 	const CircularProgressWithLabel = (props) => (

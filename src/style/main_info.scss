@@ -4,7 +4,6 @@
 	background-color: $wizard-color;
 	max-width: 1040px;
 	height: 100%;
-	text-align: center;
 	margin: 0 auto;
 	padding: 10px;
 	color: $text-1;
@@ -30,7 +29,6 @@
 
 		&_body {
 			display: flex;
-			height: 200px;
 			> div:not(:last-child) {
 				margin-right: 10px;
 			}

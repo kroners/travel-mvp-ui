@@ -22,15 +22,10 @@ const AdminCreateProgram = () => {
 		'Datos adicionales',
 	];
 
-	const test = () => {
-		console.log('object');
-	};
-
 	// Proceed to next step
 	const handleNextSelect = () => {
 		const nextStep = step + 1;
 		setStep(nextStep);
-		test();
 	};
 
 	// Go back to prev step

@@ -1,0 +1,88 @@
+@import './variables';
+
+.programs-table {
+	&__list {
+		max-width: 1140px;
+		margin: 0 auto;
+	}
+
+	&__header {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 12px;
+
+		&-searchbox {
+			display: flex;
+		}
+
+		&-titles {
+			color: $text-1;
+			display: flex;
+			font-size: 1.25em;
+			font-weight: 500;
+		}
+	}
+
+	&__body {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__row {
+		display: flex;
+		font-size: 1em;
+		font-weight: 300;
+		background-color: $row-color;
+		padding: 7px 0;
+
+		&:not(:last-child) {
+			margin-bottom: 8px;
+		}
+	}
+
+	& .program-table__id {
+		width: 50px;
+	}
+	& .program-table__codigo {
+		width: 100px;
+	}
+	& .program-table__titulo {
+		width: 200px;
+	}
+	& .program-table__descripcion {
+		width: 200px;
+	}
+	& .program-table__duracion {
+		width: 150px;
+	}
+	& .program-table__fechas {
+		width: 210px;
+	}
+	& .program-table__idioma {
+		width: 100px;
+	}
+	& .program-table__opciones {
+		flex: 1;
+	}
+
+	&__move_buttons {
+		margin-top: 20px;
+		& button {
+			background-color: $secondary-color;
+			width: 250px;
+			color: $font-light;
+			border: none;
+			margin-top: 20px;
+			&:first-child {
+				margin-right: 10px;
+			}
+		}
+	}
+}
+@media all and (max-width: 700px) {
+	.main_info {
+		&__move_buttons {
+			background-color: red;
+		}
+	}
+}

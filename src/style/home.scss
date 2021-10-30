@@ -26,6 +26,11 @@
 		}
 	}
 
+	&__body {
+		height: 550px;
+		text-align: left;
+	}
+
 	&__move_buttons {
 		margin-top: 20px;
 		& button {

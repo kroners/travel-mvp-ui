@@ -9,6 +9,8 @@ import {
 import PropTypes from 'prop-types';
 import { getAllPrograms } from '../api';
 
+require('../style/admin_home.scss');
+
 const AdminHome = (props) => {
 	const [programs, setPrograms] = useState([]);
 	const [errorResponse, setErrorResponse] = useState();
@@ -19,14 +21,9 @@ const AdminHome = (props) => {
 		retrievePrograms();
 	}, []);
 
-	const retrievePrograms = () => {
-		getAllPrograms
-			.then((data) => {
-				setPrograms(data);
-			})
-			.catch((error) => {
-				setErrorResponse(error);
-			});
+	const retrievePrograms = async () => {
+		const createdPrograms = await getAllPrograms();
+		setPrograms(createdPrograms);
 	};
 
 	const setSearchOptionSelect = (value) => {
@@ -34,7 +31,7 @@ const AdminHome = (props) => {
 	};
 
 	return (
-		<div>
+		<div className="admin__home">
 			<h1>Bienvenido</h1>
 			<div className="programs-table">
 				<div className="programs-table__container">
@@ -65,31 +62,61 @@ const AdminHome = (props) => {
 								<Button variant="contained">Buscar</Button>
 							</div>
 							<div className="programs-table__header-titles">
-								<div className="programs-table__header-title">N*</div>
-								<div className="programs-table__header-title">Código</div>
-								<div className="programs-table__header-title">Título</div>
-								<div className="programs-table__header-title">Descripción</div>
-								<div className="programs-table__header-title">Duración</div>
-								<div className="programs-table__header-title">Fechas</div>
-								<div className="programs-table__header-title">Idioma</div>
-								<div className="programs-table__header-title">Opciones</div>
+								<div className="programs-table__header-title program-table__id">
+									N*
+								</div>
+								<div className="programs-table__header-title program-table__codigo">
+									Código
+								</div>
+								<div className="programs-table__header-title program-table__titulo">
+									Título
+								</div>
+								<div className="programs-table__header-title program-table__descripcion">
+									Descripción
+								</div>
+								<div className="programs-table__header-title program-table__duracion">
+									Duración
+								</div>
+								<div className="programs-table__header-title program-table__fechas">
+									Fechas
+								</div>
+								<div className="programs-table__header-title program-table__idioma">
+									Idioma
+								</div>
+								<div className="programs-table__header-title program-table__opciones">
+									Opciones
+								</div>
 							</div>
 						</div>
 						<div className="programs-table__body">
 							{programs &&
 								programs.map((program) => {
-									const fechas = `${program.fechaInicio} - ${program.fechaFin}`;
+									const fechas = `${new Date(
+										program.fechas.fechaInicio
+									).toLocaleDateString()} - ${new Date(
+										program.fechas.fechaFin
+									).toLocaleDateString()}`;
 									const duracion = `${program.duracion.dias} dias - ${program.duracion.noches} noches`;
 									return (
-										<div className="programs-table_row">
-											<div>{program.id}</div>
-											<div>{program.codigo}</div>
-											<div>{program.titulo}</div>
-											<div>{program.descripcion}</div>
-											<div>{duracion}</div>
-											<div>{fechas}</div>
-											<div>{program.idioma}</div>
-											<div>{program.opciones}</div>
+										<div className="programs-table__row">
+											<div className="program-table__id">{program.id}</div>
+											<div className="program-table__codigo">
+												{program.codigo}
+											</div>
+											<div className="program-table__titulo">
+												{program.titulo}
+											</div>
+											<div className="program-table__descripcion">
+												{program.descripcion}
+											</div>
+											<div className="program-table__duracion">{duracion}</div>
+											<div className="program-table__fechas">{fechas}</div>
+											<div className="program-table__idioma">
+												{program.idioma}
+											</div>
+											<div className="program-table__opciones">
+												{program.opciones}
+											</div>
 										</div>
 									);
 								})}

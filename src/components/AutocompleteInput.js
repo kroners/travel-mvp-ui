@@ -4,9 +4,11 @@ import { CircularProgress, TextField } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { getDestinations } from '../api';
 
-const AutocompleteInput = ({ index, addDestination, destinationLength }) => {
+const AutocompleteInput = ({ index, addDestination }) => {
+	const [inputValue, setInputValue] = useState('');
 	const [open, setOpen] = useState(false);
 	const [options, setOptions] = useState([]);
+	const [selectedOption, setSelectedOption] = useState([]);
 	const loading = open && options.length === 0;
 
 	useEffect(() => {
@@ -17,21 +19,25 @@ const AutocompleteInput = ({ index, addDestination, destinationLength }) => {
 
 	const handleDestinationChange = async (e) => {
 		const { value } = e.target;
-		const response = await getDestinations(value);
-		const matchedDestinations = response.map((destino) => destino.nombre);
-		setOptions(matchedDestinations);
+		if (value.length >= 3) {
+			const response = await getDestinations(value);
+			const matchedDestinations = response.map((destino) => destino);
+			console.log({ matchedDestinations });
+			setOptions(matchedDestinations);
+		}
 	};
 
 	const onGetOptionSelected = (option, value, optionIndex) => {
-		if (option === value) {
-			addDestination(optionIndex, value);
+		console.log({ option, value, optionIndex });
+		if (option.id === value.id) {
 			setOptions([]);
+			addDestination(option);
 		}
 	};
 
 	return (
 		<Autocomplete
-			id={`destino-input-${index}`}
+			id={`autocomplete-input-${index}`}
 			open={open}
 			onOpen={() => {
 				setOpen(true);
@@ -42,19 +48,24 @@ const AutocompleteInput = ({ index, addDestination, destinationLength }) => {
 			getOptionSelected={(option, value) =>
 				onGetOptionSelected(option, value, index)
 			}
-			getOptionLabel={(option) => option}
+			getOptionLabel={(option) => option.nombre || ''}
 			options={options}
 			loading={loading}
 			onInputChange={(e) => handleDestinationChange(e)}
+			value={inputValue}
+			onChange={(_event, newTeam) => {
+				setInputValue(newTeam);
+			}}
 			className="general__input_field"
 			renderInput={(params) => (
 				<TextField
 					{...params}
-					label={destinationLength === 1 ? 'Destino' : `Destino #${index + 1}`}
+					label="Destino"
 					fullWidth
 					variant="outlined"
 					InputProps={{
 						...params.InputProps,
+						type: 'search',
 						endAdornment: (
 							<>
 								{loading ? (
@@ -73,7 +84,6 @@ const AutocompleteInput = ({ index, addDestination, destinationLength }) => {
 AutocompleteInput.propTypes = {
 	index: PropTypes.any,
 	addDestination: PropTypes.func,
-	destinationLength: PropTypes.number,
 };
 
 export default AutocompleteInput;

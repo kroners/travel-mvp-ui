@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import {
@@ -6,14 +6,29 @@ import {
 	ButtonGroup,
 	Checkbox,
 	FormControlLabel,
+	Radio,
+	RadioGroup,
 } from '@material-ui/core';
 import TravelContext from '../context/Travel/TravelContext';
-import { SAVE_DESTINATIONS } from '../context/types';
 
 require('../style/services.scss');
 
 export const Services = () => {
-	const { dispatch, state } = useContext(TravelContext);
+	const [state, dispatch] = useContext(TravelContext);
+	const {
+		adultos,
+		ninos,
+		bebes,
+		servicios,
+		tipo_servicio: tipoServicioState,
+	} = state;
+
+	const [tipoServicio, setTipoServicio] = useState(tipoServicioState);
+
+	const handleTipoServiciosChange = (event) => {
+		setTipoServicio(event.target.value);
+		dispatch({ type: 'SAVE_TIPO_SERVICIO', payload: event.target.value });
+	};
 
 	const [traslados, setTraslados] = useState(false);
 	const [shows, setShows] = useState(false);
@@ -21,39 +36,43 @@ export const Services = () => {
 	const [conGuia, setConGuia] = useState(false);
 	const [sinGuia, setSinGuia] = useState(false);
 	const [regular, setRegular] = useState(false);
-	const [disableConGuia, setDisableConGuia] = useState(false);
-	const [disableSinGuia, setDisableSinGuia] = useState(false);
-	const [disableRegular, setDisableRegular] = useState(false);
 
-	const initialState = {
-		counter: 0,
-	};
+	const handleCantidadUpdate = ({ operation, personType }) => {
+		let newCounter;
+		let payload;
 
-	const reducer = (innerState, action) => {
-		const { payload } = action;
-		const { counter } = innerState;
-
-		switch (action.type) {
-			case 'increment':
-				return { ...innerState, counter: counter + payload };
-
-			case 'decrement':
-				if (counter === 0) {
-					return initialState;
-				}
-				return { ...innerState, counter: counter - payload };
-
-			case 'reset':
-				return initialState;
-
+		/* eslint-disable no-nested-ternary */
+		switch (personType) {
+			case 'adultos':
+				newCounter =
+					operation === 'increment'
+						? adultos + 1
+						: adultos <= 0
+						? 0
+						: adultos - 1;
+				payload = { adultos: newCounter };
+				break;
+			case 'ninos':
+				newCounter =
+					operation === 'increment' ? ninos + 1 : ninos <= 0 ? 0 : ninos - 1;
+				payload = { ninos: newCounter };
+				break;
+			case 'bebes':
+				newCounter =
+					operation === 'increment' ? bebes + 1 : bebes <= 0 ? 0 : bebes - 1;
+				payload = { bebes: newCounter };
+				break;
 			default:
-				return innerState;
+				break;
 		}
-	};
+		/* eslint-enable */
+		console.log({ payload });
 
-	const [adultos, dispatchAdultos] = useReducer(reducer, initialState);
-	const [niños, dispatchNiños] = useReducer(reducer, initialState);
-	const [bebes, dispatchBebes] = useReducer(reducer, initialState);
+		dispatch({
+			type: 'SAVE_CANTIDAD_PERSONAS',
+			payload,
+		});
+	};
 
 	const handleTraslados = (e) => {
 		setTraslados(e.target.checked);
@@ -67,72 +86,23 @@ export const Services = () => {
 		setExcursiones(e.target.checked);
 	};
 
-	const handleConGuia = (e) => {
-		setConGuia(e.target.checked);
-		if (conGuia !== true) {
-			setDisableSinGuia(true);
-			setDisableRegular(true);
-		} else {
-			setDisableSinGuia(false);
-			setDisableRegular(false);
-		}
-	};
-
-	const handleSinGuia = (e) => {
-		setSinGuia(e.target.checked);
-		if (sinGuia !== true) {
-			setDisableConGuia(true);
-			setDisableRegular(true);
-		} else {
-			setDisableConGuia(false);
-			setDisableRegular(false);
-		}
-	};
-
-	const handleRegular = (e) => {
-		setRegular(e.target.checked);
-		if (regular !== true) {
-			setDisableSinGuia(true);
-			setDisableConGuia(true);
-		} else {
-			setDisableSinGuia(false);
-			setDisableConGuia(false);
-		}
-	};
-
 	useEffect(() => {
-		dispatch({
-			type: SAVE_DESTINATIONS,
-			payload: {
-				...state.saveDestinations,
-				traslados,
-				shows,
-				excursiones,
-				conGuia,
-				sinGuia,
-				regular,
-				disableConGuia,
-				disableSinGuia,
-				disableRegular,
-				adultos: adultos.counter,
-				niños: niños.counter,
-				bebes: bebes.counter,
-			},
-		});
-	}, [
-		traslados,
-		shows,
-		excursiones,
-		conGuia,
-		sinGuia,
-		regular,
-		disableConGuia,
-		disableSinGuia,
-		disableRegular,
-		adultos,
-		niños,
-		bebes,
-	]);
+		let selectedServices = servicios ? servicios.split(',') : [];
+		if (traslados && selectedServices.indexOf(1) < 0) {
+			selectedServices.push(1);
+		}
+		if (shows && selectedServices.indexOf(2) < 0) {
+			selectedServices.push(2);
+		}
+		if (excursiones && selectedServices.indexOf(3) < 0) {
+			selectedServices.push(3);
+		}
+
+		if (selectedServices.length > 0) {
+			selectedServices = selectedServices.join(',');
+			dispatch({ type: 'SAVE_SERVICIOS', payload: selectedServices });
+		}
+	}, [traslados, shows, excursiones]);
 
 	return (
 		<div className="services">
@@ -163,18 +133,24 @@ export const Services = () => {
 									>
 										<Button
 											onClick={() =>
-												dispatchAdultos({ type: 'increment', payload: 1 })
-											}
-										>
-											+
-										</Button>
-										<Button disabled>{adultos.counter}</Button>
-										<Button
-											onClick={() =>
-												dispatchAdultos({ type: 'decrement', payload: 1 })
+												handleCantidadUpdate({
+													operation: 'decrement',
+													personType: 'adultos',
+												})
 											}
 										>
 											-
+										</Button>
+										<Button disabled>{adultos}</Button>
+										<Button
+											onClick={() =>
+												handleCantidadUpdate({
+													operation: 'increment',
+													personType: 'adultos',
+												})
+											}
+										>
+											+
 										</Button>
 									</ButtonGroup>
 								</div>
@@ -195,18 +171,24 @@ export const Services = () => {
 									>
 										<Button
 											onClick={() =>
-												dispatchNiños({ type: 'increment', payload: 1 })
-											}
-										>
-											+
-										</Button>
-										<Button disabled>{niños.counter}</Button>
-										<Button
-											onClick={() =>
-												dispatchNiños({ type: 'decrement', payload: 1 })
+												handleCantidadUpdate({
+													operation: 'increment',
+													personType: 'ninos',
+												})
 											}
 										>
 											-
+										</Button>
+										<Button disabled>{ninos}</Button>
+										<Button
+											onClick={() =>
+												handleCantidadUpdate({
+													operation: 'increment',
+													personType: 'ninos',
+												})
+											}
+										>
+											+
 										</Button>
 									</ButtonGroup>
 								</div>
@@ -227,18 +209,24 @@ export const Services = () => {
 									>
 										<Button
 											onClick={() =>
-												dispatchBebes({ type: 'increment', payload: 1 })
-											}
-										>
-											+
-										</Button>
-										<Button disabled>{bebes.counter}</Button>
-										<Button
-											onClick={() =>
-												dispatchBebes({ type: 'decrement', payload: 1 })
+												handleCantidadUpdate({
+													operation: 'increment',
+													personType: 'bebes',
+												})
 											}
 										>
 											-
+										</Button>
+										<Button disabled>{bebes}</Button>
+										<Button
+											onClick={() =>
+												handleCantidadUpdate({
+													operation: 'increment',
+													personType: 'bebes',
+												})
+											}
+										>
+											+
 										</Button>
 									</ButtonGroup>
 								</div>
@@ -296,60 +284,52 @@ export const Services = () => {
 						</div>
 						<div className="services__tipo_servicio">
 							<h3>Tipo de servicio</h3>
-							<div className="services__opcion_tipo_servicio">
-								<span
-									style={{
-										display: 'flex',
-										justifyContent: 'left',
-										alignItems: 'center',
-										width: '30%',
-									}}
-								>
-									Privado con guía
-								</span>
-								<Checkbox
-									onChange={handleConGuia}
-									disabled={disableConGuia}
-									color="primary"
-									inputProps={{ 'aria-label': 'secondary checkbox' }}
-								/>
-							</div>
-							<div className="services__opcion_tipo_servicio">
-								<span
-									style={{
-										display: 'flex',
-										justifyContent: 'left',
-										alignItems: 'center',
-										width: '30%',
-									}}
-								>
-									Privado sin guía
-								</span>
-								<Checkbox
-									onChange={handleSinGuia}
-									disabled={disableSinGuia}
-									color="primary"
-									inputProps={{ 'aria-label': 'secondary checkbox' }}
-								/>
-							</div>
-							<div className="services__opcion_tipo_servicio">
-								<span
-									style={{
-										display: 'flex',
-										justifyContent: 'left',
-										alignItems: 'center',
-										width: '30%',
-									}}
-								>
-									Regular
-								</span>
-								<Checkbox
-									onChange={handleRegular}
-									disabled={disableRegular}
-									color="primary"
-									inputProps={{ 'aria-label': 'secondary checkbox' }}
-								/>
-							</div>
+							<RadioGroup
+								aria-label="tipo-servicio"
+								name="controlled-radio-buttons-group"
+								value={tipoServicio}
+								onChange={handleTipoServiciosChange}
+							>
+								<div className="services__opcion_tipo_servicio">
+									<span
+										style={{
+											display: 'flex',
+											justifyContent: 'left',
+											alignItems: 'center',
+											width: '30%',
+										}}
+									>
+										Privado con guía
+									</span>
+									<FormControlLabel value="privado-guia" control={<Radio />} />
+								</div>
+								<div className="services__opcion_tipo_servicio">
+									<span
+										style={{
+											display: 'flex',
+											justifyContent: 'left',
+											alignItems: 'center',
+											width: '30%',
+										}}
+									>
+										Privado sin guía
+									</span>
+									<FormControlLabel value="privado-solo" control={<Radio />} />
+								</div>
+								<div className="services__opcion_tipo_servicio">
+									<span
+										style={{
+											display: 'flex',
+											justifyContent: 'left',
+											alignItems: 'center',
+											width: '30%',
+										}}
+									>
+										Regular
+									</span>
+									<FormControlLabel value="regular" control={<Radio />} />
+								</div>
+							</RadioGroup>
 						</div>
 					</div>
 				</Grid>

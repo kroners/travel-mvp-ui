@@ -83,18 +83,6 @@ function AdditionalInfo() {
 		});
 	};
 
-	useEffect(() => {
-		const sendDest = async () => {
-			const res = await sendDestinations();
-
-			if (res.data) {
-				setPostRes(res.data);
-			}
-		};
-		sendDest();
-	}, []);
-	console.log(postRes, 'respuesta backend');
-
 	return (
 		<div className="additional_info">
 			<Grid container spacing={2}>

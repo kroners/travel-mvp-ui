@@ -1,13 +1,42 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
-import { Checkbox } from '@material-ui/core';
+import {
+	Checkbox,
+	FormControlLabel,
+	Radio,
+	RadioGroup,
+} from '@material-ui/core';
 import TravelContext from '../context/Travel/TravelContext';
 import { SAVE_DESTINATIONS } from '../context/types';
 
 require('../style/accommodation.scss');
 
 function Accommadation() {
-	const { dispatch, state } = useContext(TravelContext);
+	const [state, dispatch] = useContext(TravelContext);
+	const {
+		alimentacion: alimentacionState,
+		tipo_habitacion: tipoHabitacionState,
+		tipo_hospedaje: tipoHospedajeState,
+	} = state;
+
+	const [tipoHospedaje, setTipoHospedaje] = useState(tipoHospedajeState);
+	const [tipoHabitacion, setTipoHabitacion] = useState(tipoHabitacionState);
+	const [alimentacion, setAlimentacion] = useState(alimentacionState);
+
+	const handleTipoHospedajeChange = (event) => {
+		setTipoHospedaje(event.target.value);
+		dispatch({ type: 'SAVE_TIPO_HOSPEDAJE', payload: event.target.value });
+	};
+
+	const handleTipoHabitacionChange = (event) => {
+		setTipoHabitacion(event.target.value);
+		dispatch({ type: 'SAVE_TIPO_HABITACION', payload: event.target.value });
+	};
+
+	const handleAlimentacionChange = (event) => {
+		setAlimentacion(event.target.value);
+		dispatch({ type: 'SAVE_ALIMENTACION', payload: event.target.value });
+	};
 
 	const [estandar, setEstandar] = useState(false);
 	const [confort, setConfort] = useState(false);
@@ -155,8 +184,6 @@ function Accommadation() {
 		triple,
 	]);
 
-	console.log(useContext(TravelContext), 'useContext(TravelContext)');
-
 	return (
 		<div className="accommodation">
 			<Grid container spacing={2}>
@@ -164,35 +191,54 @@ function Accommadation() {
 					<div className="accommodation__wrapper">
 						<div className="accommodation__tipo_hospedaje">
 							<h3>Tipo de hospedaje</h3>
-							<div className="accommodation__tipo_hospedaje_wrapper">
-								<div className="accommodation__opcion_hospedaje">
-									<p>Estandar</p>
-									<Checkbox
-										onChange={handleEstandar}
-										disabled={disableEstandar}
-										color="primary"
-										inputProps={{ 'aria-label': 'secondary checkbox' }}
-									/>
+							<RadioGroup
+								aria-label="tipo-servicio"
+								name="controlled-radio-buttons-group"
+								value={tipoHospedaje}
+								onChange={handleTipoHospedajeChange}
+							>
+								<div className="accommodation__tipo_hospedaje_wrapper">
+									<div className="accommodation__opcion_hospedaje">
+										<span
+											style={{
+												display: 'flex',
+												justifyContent: 'left',
+												alignItems: 'center',
+												width: '30%',
+											}}
+										>
+											Estandar
+										</span>
+										<FormControlLabel value="estandar" control={<Radio />} />
+									</div>
+									<div className="accommodation__opcion_hospedaje">
+										<span
+											style={{
+												display: 'flex',
+												justifyContent: 'left',
+												alignItems: 'center',
+												width: '30%',
+											}}
+										>
+											Comfort
+										</span>
+										<FormControlLabel value="comfort" control={<Radio />} />
+									</div>
+									<div className="accommodation__opcion_hospedaje">
+										<span
+											style={{
+												display: 'flex',
+												justifyContent: 'left',
+												alignItems: 'center',
+												width: '30%',
+											}}
+										>
+											Lujo
+										</span>
+										<FormControlLabel value="lujo" control={<Radio />} />
+									</div>
 								</div>
-								<div className="accommodation__opcion_hospedaje">
-									<p>Comfort</p>
-									<Checkbox
-										onChange={handleConfort}
-										disabled={disableConfort}
-										color="primary"
-										inputProps={{ 'aria-label': 'secondary checkbox' }}
-									/>
-								</div>
-								<div className="accommodation__opcion_hospedaje">
-									<p>Lujo</p>
-									<Checkbox
-										onChange={handleLujo}
-										disabled={disableLujo}
-										color="primary"
-										inputProps={{ 'aria-label': 'secondary checkbox' }}
-									/>
-								</div>
-							</div>
+							</RadioGroup>
 						</div>
 						<div className="accommodation__alimentacion">
 							<h3>Alimentación</h3>

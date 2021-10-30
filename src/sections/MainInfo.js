@@ -16,80 +16,83 @@ import SearchBar from '../components/SearchBar';
 
 import TravelContext from '../context/Travel/TravelContext';
 import { SAVE_DESTINATIONS } from '../context/types';
+import AutocompleteInput from '../components/AutocompleteInput';
 
 require('../style/main_info.scss');
 
 function MainInfo() {
 	// Group useContext together
 	// deberian estar en el mismo destructure?
-	const { dispatch, state } = useContext(TravelContext);
-	const { destinations, getDestinations } = useContext(TravelContext);
+	const [state, dispatch] = useContext(TravelContext);
+	const {
+		destinos,
+		fecha_inicio: fechaInicio,
+		fecha_fin: fechaFin,
+		precio_min: precioMin,
+		precio_max: precioMax,
+	} = state;
+	console.log({ destinos });
 
-	const [budgetValue, setBudgetValue] = useState([150, 2000]);
-	const [selectedDateStart, setSelectedDateStart] = useState(new Date());
-	const [selectedDateEnd, setSelectedDateEnd] = useState(new Date());
-	const [wordEntered, setWordEntered] = useState('');
+	const [budgetRangeValue, setBudgetRangeValue] = useState([
+		precioMin,
+		precioMax,
+	]);
 	// donde se aplicaria el loading
 	const [loading, setLoading] = useState(false);
-	const [destinationList, setDestinationList] = useState(destinations);
 
-	const [destinationFromSearch, setdestinationFromSearch] = useState([]);
-	console.log(destinationFromSearch, 'data');
+	useEffect(() => {}, []);
 
-	useEffect(() => {
-		setLoading(true);
-		const getDest = async () => {
-			const res = await getDestinations();
+	// handle click to add destination
+	const handleAddDestination = (value) => {
+		const newDestinos = [...destinos];
+		newDestinos.push(value);
+		dispatch({
+			type: SAVE_DESTINATIONS,
+			payload: newDestinos,
+		});
+	};
 
-			if (res.data.length) {
-				setLoading(false);
-				setDestinationList(res.data);
-			}
-		};
-		getDest();
-	}, []);
+	// handle click to add destination
+	const handleRemoveDestination = (id) => {
+		console.log({ id });
+		const updatedDestinos = destinos.filter((destino) => destino.id !== id);
+		dispatch({
+			type: 'REMOVE_DESTINATION',
+			payload: {
+				destinos: updatedDestinos,
+			},
+		});
+	};
 
-	//   handle click to add destination
-	//    const handleAddDestination = () => {
-	//      setDestinationList([...destinationList, { destination: '' }]);
-	//    };
-
-	const handleBudgetChange = (event, newValue) => {
-		setBudgetValue(newValue);
+	const handleBudgetChange = (event, budget) => {
+		console.log({ budget });
+		setBudgetRangeValue(budget);
+		dispatch({
+			type: 'SAVE_BUDGET',
+			payload: {
+				precioMin: budget[0],
+				precioMax: budget[1],
+			},
+		});
 	};
 
 	const handleDateChangeStart = (inicio) => {
-		setSelectedDateStart(inicio);
+		dispatch({
+			type: 'SAVE_START_DATE',
+			payload: {
+				fechaInicio: inicio,
+			},
+		});
 	};
 
 	const handleDateChangeEnd = (fin) => {
-		setSelectedDateEnd(fin);
-	};
-
-	useEffect(() => {
 		dispatch({
-			type: SAVE_DESTINATIONS,
+			type: 'SAVE_END_DATE',
 			payload: {
-				...state.saveDestinations,
-				destinationFromSearch,
-				selectedDateStart,
-				selectedDateEnd,
-				duracion: Math.round(
-					(selectedDateEnd - selectedDateStart) / (1000 * 60 * 60 * 24)
-				),
-				presupuesto: budgetValue,
+				fechaFin: fin,
 			},
 		});
-	}, [
-		// me gustaria entender mas de como se aplica este useEffect
-		// estaria haciendo un trigger por cada cambio que se haya realizado en algun cambio de estas variables?
-		wordEntered,
-		selectedDateStart,
-		selectedDateEnd,
-		budgetValue,
-		destinationFromSearch,
-		dispatch,
-	]);
+	};
 
 	return (
 		<div className="main_info">
@@ -101,13 +104,28 @@ function MainInfo() {
 								<h3>Destino</h3>
 							</div>
 							<div className="main_info__destino_body">
-								<SearchBar
+								<AutocompleteInput
+									index={0}
+									addDestination={handleAddDestination}
+									destinationLength={destinos.length}
+								/>
+								{destinos.length >= 1 &&
+									destinos.map((destino, i) => (
+										<div className="main_info__destino_body_element" key={i}>
+											<CustomInput id={destino.id} value={destino.nombre} />
+											<RemoveCircleIcon
+												className="fill_circle_primary"
+												onClick={() => handleRemoveDestination(destino.id)}
+											/>
+										</div>
+									))}
+								{/* <SearchBar
 									wordEntered={wordEntered}
 									getWordEntered={setWordEntered}
 									placeholder="Buscar destino(s)"
 									data={destinationList}
 									setdestinationFromSearch={setdestinationFromSearch}
-								/>
+								/> */}
 							</div>
 						</div>
 						{/* Porque se creo este div si solo contiene a un div */}
@@ -125,7 +143,7 @@ function MainInfo() {
 										margin="normal"
 										label="Fecha de inicio"
 										format="MM/dd/yyyy"
-										value={selectedDateStart}
+										value={fechaInicio}
 										onChange={handleDateChangeStart}
 										KeyboardButtonProps={{
 											'aria-label': 'change date',
@@ -138,7 +156,7 @@ function MainInfo() {
 										margin="normal"
 										label="Fecha de finalizacion"
 										format="MM/dd/yyyy"
-										value={selectedDateEnd}
+										value={fechaFin}
 										onChange={handleDateChangeEnd}
 										KeyboardButtonProps={{
 											'aria-label': 'change date',
@@ -152,8 +170,7 @@ function MainInfo() {
 									label="Duracion"
 									className="general__input_field"
 									value={Math.round(
-										(selectedDateEnd - selectedDateStart) /
-											(1000 * 60 * 60 * 24)
+										(fechaFin - fechaInicio) / (1000 * 60 * 60 * 24)
 									)}
 								/>
 							</div>
@@ -161,11 +178,12 @@ function MainInfo() {
 						<div className="main_info__presupuesto">
 							<h3>Presupuesto</h3>
 							<Slider
-								value={budgetValue}
+								value={budgetRangeValue}
 								onChange={handleBudgetChange}
 								aria-labelledby="range-slider"
-								getAriaValueText=""
 								valueLabelDisplay="on"
+								getAriaValueText={(value) => `$${value}`}
+								min={0}
 								max={5000}
 							/>
 						</div>

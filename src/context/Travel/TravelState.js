@@ -7,53 +7,28 @@ import { GET_DESTINATIONS, POST_RESPONSE } from '../types';
 
 const TravelState = (props) => {
 	const initialState = {
-		destinations: [],
-		saveDestinations: {},
-		postResponse: {},
+		destinos: [],
+		fecha_inicio: new Date(),
+		fecha_fin: new Date(),
+		precio_min: 0,
+		precio_max: 5000,
+		adultos: 0,
+		ninos: 0,
+		bebes: 0,
+		servicios: '',
+		tipo_servicio: 1,
+		tipo_hospedaje: 1,
+		tipo_habitacion: 1,
+		alimentacion: 1,
+		actividades: '',
+		perfil_viaje: 1,
 		idioma: '',
 	};
 
 	const [state, dispatch] = useReducer(TravelReducer, initialState);
 
-	const getDestinations = async () => {
-		const res = await axios.get(`${TRAVEL_API}/api/v1/destinations/`);
-
-		if (res.data.length > 0) {
-			dispatch({
-				type: GET_DESTINATIONS,
-				payload: res.data,
-			});
-		}
-		return res;
-	};
-
-	const sendDestinations = async () => {
-		const res = await axios.post(
-			'http://127.0.0.1:8000/api/v1/prueba_POST/',
-			state.saveDestinations
-		);
-
-		if (res.data) {
-			dispatch({
-				type: POST_RESPONSE,
-				payload: res.data,
-			});
-		}
-		return res;
-	};
-
 	return (
-		<TravelContext.Provider
-			value={{
-				destinations: state.destinations,
-				saveDestinations: state.saveDestinations,
-				postResponse: state.postResponse,
-				getDestinations,
-				sendDestinations,
-				state,
-				dispatch,
-			}}
-		>
+		<TravelContext.Provider value={[state, dispatch]}>
 			{props.children}
 		</TravelContext.Provider>
 	);

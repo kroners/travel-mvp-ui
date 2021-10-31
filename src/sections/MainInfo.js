@@ -1,18 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useContext } from 'react';
 import Grid from '@material-ui/core/Grid';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
-import TextField from '@material-ui/core/TextField';
 import Slider from '@material-ui/core/Slider';
 import DateFnsUtils from '@date-io/date-fns';
 import {
 	MuiPickersUtilsProvider,
 	KeyboardDatePicker,
-	DateRangePicker,
 } from '@material-ui/pickers';
 import CustomInput from '../components/CustomInput';
-import SearchBar from '../components/SearchBar';
 
 import TravelContext from '../context/Travel/TravelContext';
 import { SAVE_DESTINATIONS } from '../context/types';
@@ -29,7 +24,6 @@ function MainInfo() {
 		precio_min: precioMin,
 		precio_max: precioMax,
 	} = state;
-	console.log({ destinos });
 
 	const [budgetRangeValue, setBudgetRangeValue] = useState([
 		precioMin,
@@ -48,7 +42,6 @@ function MainInfo() {
 
 	// handle click to add destination
 	const handleRemoveDestination = (id) => {
-		console.log({ id });
 		const updatedDestinos = destinos.filter((destino) => destino.id !== id);
 		dispatch({
 			type: 'REMOVE_DESTINATION',
@@ -59,7 +52,6 @@ function MainInfo() {
 	};
 
 	const handleBudgetChange = (event, budget) => {
-		console.log({ budget });
 		setBudgetRangeValue(budget);
 		dispatch({
 			type: 'SAVE_BUDGET',
@@ -121,13 +113,6 @@ function MainInfo() {
 										))}
 									</div>
 								)}
-								{/* <SearchBar
-									wordEntered={wordEntered}
-									getWordEntered={setWordEntered}
-									placeholder="Buscar destino(s)"
-									data={destinationList}
-									setdestinationFromSearch={setdestinationFromSearch}
-								/> */}
 							</div>
 						</div>
 						{/* Porque se creo este div si solo contiene a un div */}
@@ -200,7 +185,5 @@ function MainInfo() {
 		</div>
 	);
 }
-
-MainInfo.propTypes = {};
 
 export default MainInfo;

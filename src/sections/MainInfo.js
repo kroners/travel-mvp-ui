@@ -21,8 +21,6 @@ import AutocompleteInput from '../components/AutocompleteInput';
 require('../style/main_info.scss');
 
 function MainInfo() {
-	// Group useContext together
-	// deberian estar en el mismo destructure?
 	const [state, dispatch] = useContext(TravelContext);
 	const {
 		destinos,
@@ -37,12 +35,8 @@ function MainInfo() {
 		precioMin,
 		precioMax,
 	]);
-	// donde se aplicaria el loading
-	const [loading, setLoading] = useState(false);
 
-	useEffect(() => {}, []);
-
-	// handle click to add destination
+	// handle function to add destination
 	const handleAddDestination = (value) => {
 		const newDestinos = [...destinos];
 		newDestinos.push(value);
@@ -109,16 +103,24 @@ function MainInfo() {
 									addDestination={handleAddDestination}
 									destinationLength={destinos.length}
 								/>
-								{destinos.length >= 1 &&
-									destinos.map((destino, i) => (
-										<div className="main_info__destino_body_element" key={i}>
-											<CustomInput id={destino.id} value={destino.nombre} />
-											<RemoveCircleIcon
-												className="fill_circle_primary"
-												onClick={() => handleRemoveDestination(destino.id)}
-											/>
-										</div>
-									))}
+								{destinos.length >= 1 && (
+									<div className="main_info__destino_body_elements">
+										{destinos.map((destino, i) => (
+											<div className="main_info__destino_body_element" key={i}>
+												<CustomInput
+													id={destino.id}
+													value={destino.nombre}
+													disabled
+													className="main_info__destino_selected"
+												/>
+												<RemoveCircleIcon
+													className="destino_selected--remove"
+													onClick={() => handleRemoveDestination(destino.id)}
+												/>
+											</div>
+										))}
+									</div>
+								)}
 								{/* <SearchBar
 									wordEntered={wordEntered}
 									getWordEntered={setWordEntered}

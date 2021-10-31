@@ -5,10 +5,12 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { getDestinations } from '../api';
 
 const AutocompleteInput = ({ index, addDestination }) => {
-	const [inputValue, setInputValue] = useState('');
+	// Pending to fix how to clear input in autocomplete
+	// const [inputValue, setInputValue] = useState();
+	const [searchWord, setSearchWord] = useState('');
 	const [open, setOpen] = useState(false);
 	const [options, setOptions] = useState([]);
-	const [selectedOption, setSelectedOption] = useState([]);
+	const [selectedOption, setSelectedOption] = useState(null);
 	const loading = open && options.length === 0;
 
 	useEffect(() => {
@@ -17,23 +19,35 @@ const AutocompleteInput = ({ index, addDestination }) => {
 		}
 	}, [open]);
 
-	const handleDestinationChange = async (e) => {
+	const handleOnInputChange = async (e) => {
 		const { value } = e.target;
 		if (value.length >= 3) {
-			const response = await getDestinations(value);
-			const matchedDestinations = response.map((destino) => destino);
-			console.log({ matchedDestinations });
-			setOptions(matchedDestinations);
+			setSearchWord(value);
 		}
 	};
 
-	const onGetOptionSelected = (option, value, optionIndex) => {
-		console.log({ option, value, optionIndex });
-		if (option.id === value.id) {
-			setOptions([]);
-			addDestination(option);
-		}
+	const handleDestinationChangeOnSelectedOption = (event, value) => {
+		setSelectedOption(value);
 	};
+
+	useEffect(async () => {
+		if (searchWord && searchWord.length >= 3) {
+			const response = await getDestinations(searchWord);
+			// Pending to fix the matched destinations result.
+			// Sometimes getting all posible results
+			const matchedDestinations = response.map((destino) => destino);
+			setOptions(matchedDestinations);
+		}
+	}, [searchWord]);
+
+	useEffect(() => {
+		if (selectedOption) {
+			addDestination(selectedOption);
+			// Pending to fix how to clear input in autocomplete
+			// setInputValue('');
+			setOpen(false);
+		}
+	}, [selectedOption]);
 
 	return (
 		<Autocomplete
@@ -45,17 +59,13 @@ const AutocompleteInput = ({ index, addDestination }) => {
 			onClose={() => {
 				setOpen(false);
 			}}
-			getOptionSelected={(option, value) =>
-				onGetOptionSelected(option, value, index)
-			}
+			getOptionSelected={(option, value) => option.id === value.id}
 			getOptionLabel={(option) => option.nombre || ''}
 			options={options}
 			loading={loading}
-			onInputChange={(e) => handleDestinationChange(e)}
-			value={inputValue}
-			onChange={(_event, newTeam) => {
-				setInputValue(newTeam);
-			}}
+			onInputChange={handleOnInputChange}
+			// value={inputValue}
+			onChange={handleDestinationChangeOnSelectedOption}
 			className="general__input_field"
 			renderInput={(params) => (
 				<TextField

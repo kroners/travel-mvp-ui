@@ -115,21 +115,14 @@ function MainInfo() {
 								)}
 							</div>
 						</div>
-						{/* Porque se creo este div si solo contiene a un div */}
-						<div
-							style={{
-								display: 'flex',
-								justifyContent: 'space-around',
-								alignItems: 'center',
-							}}
-						>
-							<div className="main_info__fecha_tentaiva">
+						<div className="main_info__fechas">
+							<div className="main_info__fechas_rangos">
 								<h3>Fecha tentativa</h3>
 								<MuiPickersUtilsProvider utils={DateFnsUtils}>
 									<KeyboardDatePicker
 										margin="normal"
 										label="Fecha de inicio"
-										format="MM/dd/yyyy"
+										format="dd/MM/yyyy"
 										value={fechaInicio}
 										onChange={handleDateChangeStart}
 										KeyboardButtonProps={{
@@ -142,7 +135,7 @@ function MainInfo() {
 									<KeyboardDatePicker
 										margin="normal"
 										label="Fecha de finalizacion"
-										format="MM/dd/yyyy"
+										format="dd/MM/yyyy"
 										value={fechaFin}
 										onChange={handleDateChangeEnd}
 										KeyboardButtonProps={{
@@ -150,11 +143,13 @@ function MainInfo() {
 										}}
 									/>
 								</MuiPickersUtilsProvider>
+							</div>
 
+							<div className="main_info__fechas_duracion">
+								<h3>Duracion</h3>
 								<CustomInput
 									disabled
 									id="duracion-input"
-									label="Duracion"
 									className="general__input_field"
 									value={Math.round(
 										(fechaFin - fechaInicio) / (1000 * 60 * 60 * 24)
@@ -164,15 +159,17 @@ function MainInfo() {
 						</div>
 						<div className="main_info__presupuesto">
 							<h3>Presupuesto</h3>
-							<Slider
-								value={budgetRangeValue}
-								onChange={handleBudgetChange}
-								aria-labelledby="range-slider"
-								valueLabelDisplay="on"
-								getAriaValueText={(value) => `$${value}`}
-								min={0}
-								max={5000}
-							/>
+							<div className="main_info__presupuesto_slider">
+								<Slider
+									value={budgetRangeValue}
+									onChange={handleBudgetChange}
+									aria-labelledby="range-slider"
+									valueLabelDisplay="on"
+									getAriaValueText={(value) => `$${value}`}
+									min={0}
+									max={5000}
+								/>
+							</div>
 						</div>
 					</div>
 				</Grid>

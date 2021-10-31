@@ -21,12 +21,12 @@ export default (state, action) => {
 		case 'SAVE_START_DATE':
 			return {
 				...state,
-				fecha_inicio: payload,
+				fecha_inicio: payload.fechaInicio,
 			};
 		case 'SAVE_END_DATE':
 			return {
 				...state,
-				fecha_fin: payload,
+				fecha_fin: payload.fechaFin,
 			};
 		case 'SAVE_BUDGET':
 			return {

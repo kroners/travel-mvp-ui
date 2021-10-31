@@ -8,8 +8,13 @@
 	padding: 10px;
 	color: $text-1;
 	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+
 	> div {
 		height: 100%;
+	}
+
+	& h3 {
+		margin-top: 0;
 	}
 
 	&__wrapper {
@@ -63,8 +68,12 @@
 			}
 		}
 	}
-	&__fecha {
+
+	&__fechas {
 		display: flex;
+
+		&_rangos {
+		}
 	}
 
 	&__side_text {
@@ -79,7 +88,7 @@
 	}
 
 	&__presupuesto,
-	&__fecha {
+	&__fechas {
 		text-align: left;
 	}
 
@@ -92,6 +101,10 @@
 	&__presupuesto {
 		& .MuiSlider-root {
 			margin-top: 20px;
+		}
+
+		&_slider {
+			max-width: 50%;
 		}
 	}
 }

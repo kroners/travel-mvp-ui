@@ -1,79 +1,97 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import {
 	Checkbox,
-	TextField,
 	Select,
 	MenuItem,
 	FormControl,
 	InputLabel,
 	makeStyles,
+	FormControlLabel,
 } from '@material-ui/core';
-import { useFilters } from '../hooks';
+// import { useFilters } from '../hooks';
 import TravelContext from '../context/Travel/TravelContext';
 import { SET_LANGUAGE } from '../context/types';
 
 require('../style/additional_info.scss');
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
 	formControl: {
 		minWidth: 100,
 	},
 }));
 
 function AdditionalInfo() {
-	const { state, dispatch, sendDestinations, postResponse } =
-		useContext(TravelContext);
-	const [postRes, setPostRes] = useState(postResponse);
-	const {
-		filters: { tripProfiles, activities },
-	} = useFilters();
+	const [, dispatch] = useContext(TravelContext);
+	const [checkedActivities, setCheckedActivities] = useState([]);
+	const [checkedProfiles, setCheckedProfiles] = useState([]);
 
-	let newProfiles = [
+	const handleCheckedActivities = (event) => {
+		setCheckedActivities({
+			...checkedActivities,
+			[event.target.name]: event.target.checked,
+		});
+	};
+
+	const handleCheckedProfiles = (event) => {
+		setCheckedProfiles({
+			...checkedProfiles,
+			[event.target.name]: event.target.checked,
+		});
+	};
+
+	const newProfiles = [
 		{
+			id: 1,
 			image: '',
 			name: 'Familiar',
 		},
 		{
+			id: 2,
 			image: '',
 			name: 'Grupal',
 		},
 		{
+			id: 3,
 			image: '',
 			name: 'Pareja',
 		},
 	];
-	newProfiles = [...newProfiles, ...tripProfiles];
+	// newProfiles = [...newProfiles, ...tripProfiles];
 
-	let newActivities = [
+	const newActivities = [
 		{
+			id: 1,
 			image: '',
 			name: 'Familiar',
 		},
 		{
+			id: 2,
 			image: '',
 			name: 'Grupal',
 		},
 		{
+			id: 3,
 			image: '',
 			name: 'Pareja',
 		},
 		{
+			id: 1,
 			image: '',
 			name: 'Familiar',
 		},
 		{
+			id: 2,
 			image: '',
 			name: 'Grupal',
 		},
 		{
+			id: 3,
 			image: '',
 			name: 'Pareja',
 		},
 	];
-	newActivities = [...newActivities, ...activities];
-
-	const [idioma, setIdioma] = useState('');
+	// newActivities = [...newActivities, ...activities];
 
 	const classes = useStyles();
 	const handleIdioma = (e) => {
@@ -99,11 +117,17 @@ function AdditionalInfo() {
 								{newActivities.length &&
 									newActivities.map((activity, index) => (
 										<div key={index} className="additional_info__actividad">
-											<p>{activity.name}</p>
-											<Checkbox
-												defaultChecked
-												color="primary"
-												inputProps={{ 'aria-label': 'secondary checkbox' }}
+											<FormControlLabel
+												labelPlacement="start"
+												control={
+													<Checkbox
+														onChange={handleCheckedActivities}
+														color="primary"
+														name={activity.name}
+														inputProps={{ 'aria-label': 'secondary checkbox' }}
+													/>
+												}
+												label={activity.name}
 											/>
 										</div>
 									))}
@@ -119,11 +143,17 @@ function AdditionalInfo() {
 							<div className="additional_info__perfiles_wrapper">
 								{newProfiles.map((profile, index) => (
 									<div key={index} className="additional_info__perfil_viaje">
-										<p>{profile.name}</p>
-										<Checkbox
-											defaultChecked
-											color="primary"
-											inputProps={{ 'aria-label': 'secondary checkbox' }}
+										<FormControlLabel
+											labelPlacement="start"
+											control={
+												<Checkbox
+													onChange={handleCheckedProfiles}
+													color="primary"
+													name={profile.name}
+													inputProps={{ 'aria-label': 'secondary checkbox' }}
+												/>
+											}
+											label={profile.name}
 										/>
 									</div>
 								))}
@@ -134,9 +164,9 @@ function AdditionalInfo() {
 							<FormControl className={classes.formControl}>
 								<InputLabel>Seleccione</InputLabel>
 								<Select onChange={handleIdioma}>
-									<MenuItem value="Ingles">Ingles</MenuItem>
-									<MenuItem value="Español">Español</MenuItem>
-									<MenuItem value="Portugues">Portuges</MenuItem>
+									<MenuItem value="1">Ingles</MenuItem>
+									<MenuItem value="2">Español</MenuItem>
+									<MenuItem value="3">Portugues</MenuItem>
 								</Select>
 							</FormControl>
 						</div>

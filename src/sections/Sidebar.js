@@ -246,8 +246,6 @@ const Sidebar = ({ children }) => {
 		return `(${counter}/3)`;
 	};
 
-	console.log(useContext(TravelContext));
-	console.log(state.idioma, 'idioma');
 	return (
 		<div className="sidebar__wrapper">
 			<CssBaseline />

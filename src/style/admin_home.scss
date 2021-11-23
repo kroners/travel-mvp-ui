@@ -13,6 +13,18 @@
 
 		&-searchbox {
 			display: flex;
+			margin-bottom: 15px;
+			justify-content: flex-end;
+			align-items: center;
+			max-height: 30px;
+
+			& .searchbox-input {
+				width: 335px;
+
+				& input {
+					padding: 8px;
+				}
+			}
 		}
 
 		&-titles {
@@ -65,17 +77,15 @@
 		flex: 1;
 	}
 
-	&__move_buttons {
+	&__add-program {
 		margin-top: 20px;
+		text-align: left;
 		& button {
-			background-color: $secondary-color;
+			background-color: $primary-color;
 			width: 250px;
 			color: $font-light;
 			border: none;
 			margin-top: 20px;
-			&:first-child {
-				margin-right: 10px;
-			}
 		}
 	}
 }

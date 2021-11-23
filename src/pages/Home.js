@@ -18,6 +18,8 @@ require('../style/home.scss');
 const Home = () => {
 	let innerSectionForm;
 	const history = useHistory();
+	const [state] = useContext(TravelContext);
+	const [, dispatch] = useContext(ProgramContext);
 
 	const [step, setStep] = useState(0);
 	const stepsInfo = [
@@ -41,12 +43,12 @@ const Home = () => {
 
 	// Handle Submit to get programs from filters
 	const handleSubmit = async () => {
-		const [state] = useContext(TravelContext);
-		const [, dispatch] = useContext(ProgramContext);
 		const filtros = getFilters(state);
+		console.log({ filtros });
 
 		const response = await getPrograms(filtros);
-		if (response) {
+		console.log({ response });
+		if (response && response.length > 0) {
 			dispatch({
 				type: 'SAVE_PROGRAMS',
 				payload: {

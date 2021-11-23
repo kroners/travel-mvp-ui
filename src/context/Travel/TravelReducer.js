@@ -1,9 +1,4 @@
-import {
-	GET_DESTINATIONS,
-	SAVE_DESTINATIONS,
-	POST_RESPONSE,
-	SET_LANGUAGE,
-} from '../types';
+import { SAVE_DESTINATIONS, POST_RESPONSE, SET_LANGUAGE } from '../types';
 
 export default (state, action) => {
 	const { payload, type } = action;

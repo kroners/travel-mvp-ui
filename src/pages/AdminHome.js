@@ -6,12 +6,12 @@ import {
 	Select,
 	MenuItem,
 } from '@material-ui/core';
-import PropTypes from 'prop-types';
 import { getAllPrograms } from '../api';
+import CustomInput from '../components/CustomInput';
 
 require('../style/admin_home.scss');
 
-const AdminHome = (props) => {
+const AdminHome = () => {
 	const [programs, setPrograms] = useState([]);
 	const [errorResponse, setErrorResponse] = useState();
 	const [searchOption, setSearchOption] = useState('codigo');
@@ -40,9 +40,6 @@ const AdminHome = (props) => {
 						<div className="programs-table__header">
 							<div className="programs-table__header-searchbox">
 								{/* Add input and button elements for searching */}
-								<InputLabel id="demo-simple-select-label">
-									Ingresa el {searchOption} del programa
-								</InputLabel>
 								<Select
 									labelId="demo-simple-select-label"
 									id="demo-simple-select"
@@ -54,10 +51,10 @@ const AdminHome = (props) => {
 									<MenuItem value="titulo">Titulo</MenuItem>
 									<MenuItem value="numero">Numero</MenuItem>
 								</Select>
-								<TextField
-									id="outlined-basic"
-									label="Outlined"
-									variant="outlined"
+								<CustomInput
+									id="search-option"
+									label={`Ingresa el ${searchOption} del programa`}
+									className="searchbox-input"
 								/>
 								<Button variant="contained">Buscar</Button>
 							</div>
@@ -123,6 +120,9 @@ const AdminHome = (props) => {
 							{errorResponse && (
 								<div className="programs-table_error">{errorResponse}</div>
 							)}
+						</div>
+						<div className="programs-table__add-program">
+							<Button variant="contained">Añadir un paquete</Button>
 						</div>
 					</div>
 				</div>

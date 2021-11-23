@@ -13,6 +13,7 @@ export const getDestinations = async (destino) => {
 
 		return destinationList.data;
 	} catch (error) {
+		// eslint-disable-next-line
 		console.log(error);
 	}
 	return [];
@@ -20,12 +21,17 @@ export const getDestinations = async (destino) => {
 
 export const getPrograms = async (filtros) => {
 	try {
+		if (!filtros) {
+			throw new Error('No se brindo filtros de busqueda');
+		}
+
 		const destinationList = await axios.get(`${TRAVEL_BASE_PATH}/programs/`, {
 			params: filtros,
 		});
 
 		return destinationList.data;
 	} catch (error) {
+		// eslint-disable-next-line
 		console.log(error);
 	}
 	return [];
@@ -89,22 +95,8 @@ export const getAllPrograms = async () => {
 
 		return destinationList.data;
 	} catch (error) {
+		// eslint-disable-next-line
 		console.log(error);
 	}
 	return [];
 };
-
-// export const sendDestinations = async () => {
-// 	const res = await axios.post(
-// 		'http://127.0.0.1:8000/api/v1/prueba_POST/',
-// 		state.saveDestinations
-// 	);
-
-// 	if (res.data) {
-// 		dispatch({
-// 			type: POST_RESPONSE,
-// 			payload: res.data,
-// 		});
-// 	}
-// 	return res;
-// };

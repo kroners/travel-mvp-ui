@@ -1,9 +1,7 @@
 import React, { useReducer } from 'react';
-import axios from 'axios';
+import PropTypes from 'prop-types';
 import TravelReducer from './TravelReducer';
 import TravelContext from './TravelContext';
-import { TRAVEL_API } from '../../api/index';
-import { GET_DESTINATIONS, POST_RESPONSE } from '../types';
 
 const TravelState = (props) => {
 	const initialState = {
@@ -32,6 +30,10 @@ const TravelState = (props) => {
 			{props.children}
 		</TravelContext.Provider>
 	);
+};
+
+TravelState.propTypes = {
+	children: PropTypes.node,
 };
 
 export default TravelState;

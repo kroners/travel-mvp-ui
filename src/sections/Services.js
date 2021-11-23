@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import {
 	Button,
@@ -24,18 +23,14 @@ export const Services = () => {
 	} = state;
 
 	const [tipoServicio, setTipoServicio] = useState(tipoServicioState);
+	const [traslados, setTraslados] = useState(false);
+	const [shows, setShows] = useState(false);
+	const [excursiones, setExcursiones] = useState(false);
 
 	const handleTipoServiciosChange = (event) => {
 		setTipoServicio(event.target.value);
 		dispatch({ type: 'SAVE_TIPO_SERVICIO', payload: event.target.value });
 	};
-
-	const [traslados, setTraslados] = useState(false);
-	const [shows, setShows] = useState(false);
-	const [excursiones, setExcursiones] = useState(false);
-	const [conGuia, setConGuia] = useState(false);
-	const [sinGuia, setSinGuia] = useState(false);
-	const [regular, setRegular] = useState(false);
 
 	const handleCantidadUpdate = ({ operation, personType }) => {
 		let newCounter;
@@ -66,7 +61,6 @@ export const Services = () => {
 				break;
 		}
 		/* eslint-enable */
-		console.log({ payload });
 
 		dispatch({
 			type: 'SAVE_CANTIDAD_PERSONAS',
@@ -172,7 +166,7 @@ export const Services = () => {
 										<Button
 											onClick={() =>
 												handleCantidadUpdate({
-													operation: 'increment',
+													operation: 'decrement',
 													personType: 'ninos',
 												})
 											}
@@ -210,7 +204,7 @@ export const Services = () => {
 										<Button
 											onClick={() =>
 												handleCantidadUpdate({
-													operation: 'increment',
+													operation: 'decrement',
 													personType: 'bebes',
 												})
 											}
@@ -333,7 +327,11 @@ export const Services = () => {
 						</div>
 					</div>
 				</Grid>
-				<Grid item xs={6} />
+				<Grid item xs={6}>
+					<div className="main_info__side_text">
+						<img src="../assets/grupal.jpg" alt="" />
+					</div>
+				</Grid>
 			</Grid>
 		</div>
 	);

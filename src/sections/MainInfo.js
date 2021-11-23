@@ -1,24 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
-import TextField from '@material-ui/core/TextField';
-import Slider from '@material-ui/core/Slider';
-import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider, KeyboardDatePicker, DateRangePicker } from '@material-ui/pickers';
-import CustomInput from '../components/CustomInput';
+import CustomSliderMain from '../components/CustomSliderMain';
 import SearchBar from '../components/SearchBar';
-import AutocompleteInput from '../components/AutocompleteInput';
-
 import TravelContext from '../context/Travel/TravelContext';
 import { SAVE_DESTINATIONS } from '../context/types';
-
+import CustomDatePicker from '../components/CustomDatePicker';
 require('../style/main_info.scss');
 
 function MainInfo({ values, handleNextSelect }) {
-  // Group useContext together
-  // deberian estar en el mismo destructure?
   const { dispatch, state } = useContext(TravelContext);
   const { destinations, getDestinations } = useContext(TravelContext);
 
@@ -26,30 +16,22 @@ function MainInfo({ values, handleNextSelect }) {
   const [selectedDateStart, setSelectedDateStart] = useState(new Date());
   const [selectedDateEnd, setSelectedDateEnd] = useState(new Date());
   const [wordEntered, setWordEntered] = useState('');
-  // donde se aplicaria el loading
-  const [loading, setLoading] = useState(false);
+
   const [destinationList, setDestinationList] = useState(destinations);
 
   const [destinationFromSearch, setdestinationFromSearch] = useState([]);
   console.log(destinationFromSearch, 'data');
 
   useEffect(() => {
-    setLoading(true);
     const getDest = async () => {
       const res = await getDestinations();
 
       if (res.data.length) {
-        setLoading(false);
         setDestinationList(res.data);
       }
     };
     getDest();
   }, []);
-
-  //   handle click to add destination
-  //    const handleAddDestination = () => {
-  //      setDestinationList([...destinationList, { destination: '' }]);
-  //    };
 
   const handleBudgetChange = (event, newValue) => {
     setBudgetValue(newValue);
@@ -76,14 +58,13 @@ function MainInfo({ values, handleNextSelect }) {
       },
     });
   }, [
-    // me gustaria entender mas de como se aplica este useEffect
-    // estaria haciendo un trigger por cada cambio que se haya realizado en algun cambio de estas variables?
     wordEntered,
     selectedDateStart,
     selectedDateEnd,
     budgetValue,
     destinationFromSearch,
     dispatch,
+    state.saveDestinations,
   ]);
 
   return (
@@ -96,7 +77,6 @@ function MainInfo({ values, handleNextSelect }) {
                 <h3>Destino</h3>
               </div>
               <div className='main_info__destino_body'>
-                {/*<AutocompleteInput />*/}
                 <SearchBar
                   wordEntered={wordEntered}
                   getWordEntered={setWordEntered}
@@ -113,54 +93,24 @@ function MainInfo({ values, handleNextSelect }) {
                 justifyContent: 'space-around',
                 alignItems: 'center',
               }}>
-              <div className='main_info__fecha_tentaiva'>
+              <div className='main_info__fecha'>
                 <h3>Fecha tentativa</h3>
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <KeyboardDatePicker
-                    margin='normal'
-                    //id='date-picker-dialog'
-                    label='Fecha de inicio'
-                    format='MM/dd/yyyy'
-                    value={selectedDateStart}
-                    onChange={handleDateChangeStart}
-                    KeyboardButtonProps={{
-                      'aria-label': 'change date',
-                    }}
-                  />
-                </MuiPickersUtilsProvider>
-
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <KeyboardDatePicker
-                    margin='normal'
-                    //id='date-picker-dialog'
-                    label='Fecha de finalizacion'
-                    format='MM/dd/yyyy'
-                    value={selectedDateEnd}
-                    onChange={handleDateChangeEnd}
-                    KeyboardButtonProps={{
-                      'aria-label': 'change date',
-                    }}
-                  />
-                </MuiPickersUtilsProvider>
-
-                <CustomInput
-                  disabled={true}
-                  id='duracion-input'
-                  label='Duracion'
-                  className='general__input_field'
-                  value={Math.round((selectedDateEnd - selectedDateStart) / (1000 * 60 * 60 * 24))}
+                <CustomDatePicker
+                  getStart={handleDateChangeStart}
+                  getEnd={handleDateChangeEnd}
+                  valueStart={selectedDateStart}
+                  valueEnd={selectedDateEnd}
                 />
               </div>
             </div>
             <div className='main_info__presupuesto'>
               <h3>Presupuesto</h3>
-              <Slider
+              <CustomSliderMain
                 value={budgetValue}
                 onChange={handleBudgetChange}
-                aria-labelledby='range-slider'
-                getAriaValueText=''
-                valueLabelDisplay='on'
                 max={5000}
+                valueLabelDisplay='on'
+                aria-labelledby='range-slider'
               />
             </div>
           </div>

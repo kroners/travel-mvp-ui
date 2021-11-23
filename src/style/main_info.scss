@@ -3,7 +3,7 @@
 .main_info {
   background-color: $wizard-color;
   max-width: 1040px;
-  height: 100%;
+  max-height: 600px;
   text-align: center;
   margin: 0 auto;
   padding: 10px;
@@ -50,7 +50,7 @@
     }
   }
   &__fecha {
-    display: flex;
+    margin-top: 10px;
   }
 
   &__side_text {
@@ -76,7 +76,7 @@
 
   &__presupuesto {
     & .MuiSlider-root {
-      margin-top: 20px;
+      margin-top: 10px;
     }
   }
 }

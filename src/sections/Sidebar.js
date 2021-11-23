@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import clsx from 'clsx';
-import { makeStyles, useTheme, withStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -17,7 +17,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
-import Slider from '@material-ui/core/Slider';
+
+import CustomSlider from '../components/CustomSlider';
 import moment from 'moment';
 
 import StarsIcon from '@material-ui/icons/Stars';
@@ -104,55 +105,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
   },
 }));
-
-const CustomSlider = withStyles({
-  root: {
-    color: '#3880ff',
-    height: 4,
-    padding: '15px 0',
-    marginRight: 10,
-  },
-  thumb: {
-    height: 10,
-    width: 10,
-    backgroundColor: '#fff',
-
-    marginTop: -4,
-    marginLeft: 0,
-    '&:focus, &:hover, &$active': {
-      boxShadow: '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {},
-    },
-  },
-  active: {},
-  valueLabel: {
-    left: -10,
-    top: 10,
-    '& *': {
-      background: 'transparent',
-      color: '#000',
-    },
-  },
-  track: {
-    height: 3,
-  },
-  rail: {
-    height: 3,
-    opacity: 0.5,
-    backgroundColor: '#bfbfbf',
-  },
-  mark: {
-    backgroundColor: '#bfbfbf',
-    height: 8,
-    width: 1,
-    marginTop: -3,
-  },
-  markActive: {
-    opacity: 1,
-    backgroundColor: 'currentColor',
-  },
-})(Slider);
 
 const Sidebar = ({ children }) => {
   const classes = useStyles();

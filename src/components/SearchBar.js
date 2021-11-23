@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import { TextField } from '@material-ui/core';
-//import search_bar from '../style/search_bar.scss';
+import '../style/search_bar.scss';
 import SearchIcon from '@material-ui/icons/Search';
 import CustomInput from '../components/CustomInput';
 
@@ -52,19 +52,13 @@ const SearchBar = ({
 
   return (
     <div className='search'>
-      <div
-        className='searchInputs'
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'flex-start',
-        }}>
+      <div className='searchInputs'>
         <TextField
           label={placeholder}
           type='search'
           variant='outlined'
+          size='small'
           onChange={handleFilter}
-          value={wordEntered}
           InputProps={{
             endAdornment: (
               <InputAdornment position='end'>
@@ -74,27 +68,24 @@ const SearchBar = ({
           }}
         />
       </div>
-      {filteredData.length != 0 && (
-        <div
-          className='dataResult'
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-          }}>
+      {filteredData.length !== 0 && (
+        <div className='dataResult'>
           {filteredData.map((value, i) => {
             return (
               <div onClick={() => fillInput(value)} key={i} id='clearBtn' className='dataItem'>
-                <p>{value.nombre}</p>
+                {value.nombre}
               </div>
             );
           })}
         </div>
       )}
       {showReview !== false && (
-        <div className='accordion' style={{ marginTop: '2vh', width: '100%' }}>
+        <div
+          style={{
+            marginTop: '2vh',
+            width: '100%',
+          }}>
           {newArray.map((value, i) => {
-            //if (value.nombre === wordEntered) {
             return (
               <div
                 key={i}
@@ -103,6 +94,7 @@ const SearchBar = ({
                   gridTemplateColumns: '1fr 1fr 1fr',
                   gap: '10px',
                   justifyContent: 'space-between',
+                  marginBottom: '10px',
                 }}>
                 {value.pais && (
                   <CustomInput
@@ -135,7 +127,6 @@ const SearchBar = ({
                 )}
               </div>
             );
-            //}
           })}
         </div>
       )}

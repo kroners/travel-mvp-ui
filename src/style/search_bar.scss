@@ -1,26 +1,22 @@
+.search {
+  position: absolute;
+  width: 38%;
+  height: 35%;
+}
+
 .searchInputs {
   margin-top: 5px;
-  display: center;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 }
 
 .search input {
   background-color: white;
-  border: 0;
-  border-radius: 2px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-  font-size: 18px;
+  font-size: 16px;
   padding: 15px;
-  height: 30px;
-  width: 300px;
-}
-
-.searchIcon {
-  height: 60px;
-  width: 50px;
-  background-color: white;
-  display: grid;
-  place-items: center;
+  height: 15px;
+  width: 200px;
 }
 
 input:focus {
@@ -31,44 +27,29 @@ input:focus {
 }
 
 .dataResult {
-  margin-top: 5px;
-  width: 300px;
-  height: 60px;
+  margin-top: 2px;
+  width: 230px;
+  height: 100px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  overflow: hidden;
   overflow-y: auto;
-  display: center;
-  margin: auto;
+  position: absolute;
+  z-index: 3;
 }
 
 .dataResult::-webkit-scrollbar {
   display: none;
 }
 
-.dataResult .dataItem {
-  width: 100%;
-  height: 50px;
+.dataItem {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  color: black;
-}
-
-.dataItem p {
-  margin-left: 10px;
-}
-p {
-  text-decoration: none;
-}
-
-p:hover {
-  background-color: lightgrey;
-}
-
-.accordion {
-  margin: auto;
-  width: 300px;
-  display: center;
+  padding: 5%;
+  background-color: white;
+  position: relative;
+  z-index: 3;
 }
 
 #clearBtn {

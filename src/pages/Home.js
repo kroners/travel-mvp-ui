@@ -41,13 +41,11 @@ const Home = () => {
 		setStep(prevStep);
 	}
 
-	// Handle Submit to get programs from filters
+	// Handle Submit to get programs from selected filters
 	const handleSubmit = async () => {
 		const filtros = getFilters(state);
-		console.log({ filtros });
 
 		const response = await getPrograms(filtros);
-		console.log({ response });
 		if (response && response.length > 0) {
 			dispatch({
 				type: 'SAVE_PROGRAMS',

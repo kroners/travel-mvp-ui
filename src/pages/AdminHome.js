@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
 	Button,
 	TextField,
@@ -12,6 +13,7 @@ import CustomInput from '../components/CustomInput';
 require('../style/admin_home.scss');
 
 const AdminHome = () => {
+	const history = useHistory();
 	const [programs, setPrograms] = useState([]);
 	const [errorResponse, setErrorResponse] = useState();
 	const [searchOption, setSearchOption] = useState('codigo');
@@ -28,6 +30,10 @@ const AdminHome = () => {
 
 	const setSearchOptionSelect = (value) => {
 		setSearchOption(value);
+	};
+
+	const handleRedirectToCreateProgram = () => {
+		history.push('/admin/create');
 	};
 
 	return (
@@ -122,7 +128,12 @@ const AdminHome = () => {
 							)}
 						</div>
 						<div className="programs-table__add-program">
-							<Button variant="contained">Añadir un paquete</Button>
+							<Button
+								variant="contained"
+								onClick={() => handleRedirectToCreateProgram()}
+							>
+								Añadir un paquete
+							</Button>
 						</div>
 					</div>
 				</div>

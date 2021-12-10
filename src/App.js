@@ -6,6 +6,7 @@ import ProgramSearch from './pages/ProgramSearch';
 import ProgramDetail from './pages/ProgramDetail';
 import ContactAgent from './pages/ContactAgent';
 import AdminHome from './pages/AdminHome';
+import AdminCreateProgram from './pages/AdminCreateProgram';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -41,6 +42,7 @@ const App = () => (
 						<Route path="/contact-agent" exact component={ContactAgent} />
 						<Route path="/" exact component={Home} />
 						<Route path="/admin/home" exact component={AdminHome} />
+						<Route path="/admin/create" exact component={AdminCreateProgram} />
 					</Switch>
 					<Footer />
 				</ProgramState>

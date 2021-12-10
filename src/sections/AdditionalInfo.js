@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import {
 	Checkbox,
@@ -27,18 +27,52 @@ function AdditionalInfo() {
 	const [checkedProfiles, setCheckedProfiles] = useState([]);
 
 	const handleCheckedActivities = (event) => {
-		setCheckedActivities({
+		const selectedActivities = [
 			...checkedActivities,
-			[event.target.name]: event.target.checked,
-		});
+			{
+				name: event.target.name,
+				checked: event.target.checked,
+				id: event.target.id,
+			},
+		].filter((act) => act.checked);
+		setCheckedActivities(selectedActivities);
 	};
 
 	const handleCheckedProfiles = (event) => {
-		setCheckedProfiles({
+		const selectedProfiles = [
 			...checkedProfiles,
-			[event.target.name]: event.target.checked,
-		});
+			{
+				name: event.target.name,
+				checked: event.target.checked,
+				id: event.target.id,
+			},
+		].filter((prof) => prof.checked);
+		setCheckedProfiles(selectedProfiles);
 	};
+
+	useEffect(() => {
+		if (checkedActivities.length > 0) {
+			const actividadesIds = checkedActivities
+				.map((act) => act.checked && act.id)
+				.join(',');
+			dispatch({
+				type: 'SAVE_ACTIVIDADES',
+				payload: actividadesIds,
+			});
+		}
+	}, [checkedActivities]);
+
+	useEffect(() => {
+		if (checkedProfiles.length) {
+			const perfilesIds = checkedProfiles
+				.map((prof) => prof.checked && prof.id)
+				.join(',');
+			dispatch({
+				type: 'SAVE_PERFIL_VIAJE',
+				payload: perfilesIds,
+			});
+		}
+	}, [checkedProfiles]);
 
 	const newProfiles = [
 		{
@@ -76,17 +110,17 @@ function AdditionalInfo() {
 			name: 'Pareja',
 		},
 		{
-			id: 1,
+			id: 4,
 			image: '',
 			name: 'Familiar',
 		},
 		{
-			id: 2,
+			id: 5,
 			image: '',
 			name: 'Grupal',
 		},
 		{
-			id: 3,
+			id: 6,
 			image: '',
 			name: 'Pareja',
 		},
@@ -124,6 +158,7 @@ function AdditionalInfo() {
 														onChange={handleCheckedActivities}
 														color="primary"
 														name={activity.name}
+														id={`${activity.id}`}
 														inputProps={{ 'aria-label': 'secondary checkbox' }}
 													/>
 												}
@@ -150,6 +185,7 @@ function AdditionalInfo() {
 													onChange={handleCheckedProfiles}
 													color="primary"
 													name={profile.name}
+													id={`${profile.id}`}
 													inputProps={{ 'aria-label': 'secondary checkbox' }}
 												/>
 											}

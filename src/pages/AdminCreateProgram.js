@@ -64,7 +64,7 @@ const AdminCreateProgram = () => {
 	}
 
 	return (
-		<div className="admin-home">
+		<div className="admin__create-program">
 			<div className="admin-home__header">Vista de administrador</div>
 			<div className="admin-home__stepper">
 				<Stepper activeStep={step}>

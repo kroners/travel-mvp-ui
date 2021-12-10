@@ -39,15 +39,20 @@ export default (state, action) => {
 				...state,
 				tipo_servicio: payload,
 			};
-		case 'SAVE_SERVICIOs':
+		case 'SAVE_SERVICIOS':
 			return {
 				...state,
 				servicios: payload,
 			};
-		case POST_RESPONSE:
+		case 'SAVE_ACTIVIDADES':
 			return {
 				...state,
-				postResponse: payload,
+				actividades: payload,
+			};
+		case 'SAVE_PERFIL_VIAJE':
+			return {
+				...state,
+				perfil_viaje: payload,
 			};
 		case SET_LANGUAGE:
 			return {

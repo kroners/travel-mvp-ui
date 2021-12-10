@@ -16,7 +16,6 @@ const SearchBar = ({
 	const [showReview, setShowReview] = useState(false);
 	const [summary, setSummary] = useState([]);
 	const [newArray, setNewArray] = useState([]);
-	console.log({ newArray });
 
 	const handleFilter = (event) => {
 		const searchWord = event.target.value;

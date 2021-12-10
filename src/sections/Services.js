@@ -28,8 +28,22 @@ export const Services = () => {
 	const [excursiones, setExcursiones] = useState(false);
 
 	const handleTipoServiciosChange = (event) => {
+		let tipoServicioValue;
+
 		setTipoServicio(event.target.value);
-		dispatch({ type: 'SAVE_TIPO_SERVICIO', payload: event.target.value });
+		switch (event.target.value) {
+			case 'regular':
+				tipoServicioValue = 3;
+				break;
+			case 'privado-solo':
+				tipoServicioValue = 2;
+				break;
+			case 'privado-guia':
+			default:
+				tipoServicioValue = 1;
+				break;
+		}
+		dispatch({ type: 'SAVE_TIPO_SERVICIO', payload: tipoServicioValue });
 	};
 
 	const handleCantidadUpdate = ({ operation, personType }) => {

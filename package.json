@@ -23,7 +23,9 @@
 		"react-dom": "^17.0.1",
 		"react-router-dom": "^5.2.0",
 		"react-scripts": "4.0.0",
-		"web-vitals": "^0.2.4"
+		"web-vitals": "^0.2.4",
+		"eslint": "^7.32.0",
+		"eslint-config-airbnb": "^18.2.1"
 	},
 	"scripts": {
 		"start": "react-scripts start",
@@ -52,8 +54,6 @@
 		]
 	},
 	"devDependencies": {
-		"eslint": "^7.32.0",
-		"eslint-config-airbnb": "^18.2.1",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-prettier": "^4.0.0",
 		"eslint-plugin-react": "^7.26.1",

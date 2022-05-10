@@ -8,9 +8,9 @@ import {
 	Radio,
 	RadioGroup,
 } from '@material-ui/core';
-import TravelContext from '../context/Travel/TravelContext';
+import TravelContext from '../../context/Travel/TravelContext';
 
-require('../style/services.scss');
+require('../../style/services.scss');
 
 export const Services = () => {
 	const [state, dispatch] = useContext(TravelContext);

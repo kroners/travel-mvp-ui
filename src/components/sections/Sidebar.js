@@ -22,7 +22,7 @@ import moment from 'moment';
 import StarsIcon from '@material-ui/icons/Stars';
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import SupervisedUserCircleOutlinedIcon from '@material-ui/icons/SupervisedUserCircleOutlined';
-import TravelContext from '../context/Travel/TravelContext';
+import TravelContext from '../../context/Travel/TravelContext';
 
 const drawerWidth = 240;
 

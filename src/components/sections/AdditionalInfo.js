@@ -10,10 +10,10 @@ import {
 	FormControlLabel,
 } from '@material-ui/core';
 // import { useFilters } from '../hooks';
-import TravelContext from '../context/Travel/TravelContext';
-import { SET_LANGUAGE } from '../context/types';
+import TravelContext from '../../context/Travel/TravelContext';
+import { SET_LANGUAGE } from '../../context/types';
 
-require('../style/additional_info.scss');
+require('../../style/additional_info.scss');
 
 const useStyles = makeStyles(() => ({
 	formControl: {

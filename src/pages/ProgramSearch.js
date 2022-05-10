@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import ChoiceCard from '../components/ChoiceCard';
 import MainCard from '../components/MainCard';
 import { useProjects } from '../hooks';
-import Sidebar from '../sections/Sidebar';
+import Sidebar from '../components/sections/Sidebar';
 
 require('../style/program_search.scss');
 

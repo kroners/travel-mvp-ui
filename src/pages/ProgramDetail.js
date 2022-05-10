@@ -6,7 +6,7 @@ import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useFilters } from '../hooks';
-import Sidebar from '../sections/Sidebar';
+import Sidebar from '../components/sections/Sidebar';
 
 require('../style/program_detail.scss');
 

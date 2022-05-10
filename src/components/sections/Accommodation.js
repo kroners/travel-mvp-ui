@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
-import TravelContext from '../context/Travel/TravelContext';
+import TravelContext from '../../context/Travel/TravelContext';
 
-require('../style/accommodation.scss');
+require('../../style/accommodation.scss');
 
 function Accommadation() {
 	const [state, dispatch] = useContext(TravelContext);

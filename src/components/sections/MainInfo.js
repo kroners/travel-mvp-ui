@@ -7,13 +7,13 @@ import {
 	MuiPickersUtilsProvider,
 	KeyboardDatePicker,
 } from '@material-ui/pickers';
-import CustomInput from '../components/CustomInput';
+import CustomInput from '../CustomInput';
 
-import TravelContext from '../context/Travel/TravelContext';
-import { SAVE_DESTINATIONS } from '../context/types';
-import AutocompleteInput from '../components/AutocompleteInput';
+import TravelContext from '../../context/Travel/TravelContext';
+import { SAVE_DESTINATIONS } from '../../context/types';
+import AutocompleteInput from '../AutocompleteInput';
 
-require('../style/main_info.scss');
+require('../../style/main_info.scss');
 
 function MainInfo() {
 	const [state, dispatch] = useContext(TravelContext);

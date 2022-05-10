@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Step, StepLabel, Stepper } from '@material-ui/core';
-import BasicInfo from '../sections/admin/BasicInfo';
-import ServicesHousing from '../sections/admin/ServicesHousing';
-import PackageDetails from '../sections/admin/PackageDetails';
-import Itinerary from '../sections/admin/Itinerary';
-import Price from '../sections/admin/Price';
-import Extras from '../sections/admin/Extras';
+import BasicInfo from '../components/sections/admin/BasicInfo';
+import ServicesHousing from '../components/sections/admin/ServicesHousing';
+import PackageDetails from '../components/sections/admin/PackageDetails';
+import Itinerary from '../components/sections/admin/Itinerary';
+import Price from '../components/sections/admin/Price';
+import Extras from '../components/sections/admin/Extras';
 
 const AdminCreateProgram = () => {
 	let innerSectionForm;

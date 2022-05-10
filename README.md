@@ -1,6 +1,31 @@
-# Getting Started with Create React App
+# Wizard Form built with React
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+The idea for this project is to build a wizard form divided in different sections to select all different services available.
+
+It requires a backend service to run properly and fetch some data. Still pending to make it backend agnostic.
+
+## Tech Stack:
+
+- React
+- Context API
+- Material UI
+
+Notes: all libraries are listed in dependencies as there was an issue with deployment into Heroku. There's a pending fix to be done.
+
+## Project structure:
+
+- api: Listing all endpoints
+- assets: various project assets
+- components: common component structures to be applied
+  - sections: portions of mixed components used for the wizard form
+- context: files for context applied in the project
+- helpers: various function helpers
+- hooks: custom hooks
+- pages: main UI structures - containers
+- selectors
+- style
 
 ## Available Scripts
 

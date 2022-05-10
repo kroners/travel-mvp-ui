@@ -21,7 +21,7 @@ const AutocompleteInput = ({ index, addDestination }) => {
 
 	const handleOnInputChange = async (e) => {
 		const { value } = e.target;
-		if (value.length >= 3) {
+		if (value && value.length >= 3) {
 			setSearchWord(value);
 		}
 	};
@@ -73,18 +73,18 @@ const AutocompleteInput = ({ index, addDestination }) => {
 					label="Destino"
 					fullWidth
 					variant="outlined"
-					InputProps={{
-						...params.InputProps,
-						type: 'search',
-						endAdornment: (
-							<>
-								{loading ? (
-									<CircularProgress color="inherit" size={20} />
-								) : null}
-								{params.InputProps.endAdornment}
-							</>
-						),
-					}}
+					// InputProps={{
+					// 	...params.InputProps,
+					// 	type: 'search',
+					// 	endAdornment: (
+					// 		<>
+					// 			{loading ? (
+					// 				<CircularProgress color="inherit" size={20} />
+					// 			) : null}
+					// 			{params.InputProps.endAdornment}
+					// 		</>
+					// 	),
+					// }}
 				/>
 			)}
 		/>
